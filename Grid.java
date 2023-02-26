@@ -1,5 +1,5 @@
 import java.util.Arrays;
-import Utils.ArrayUtils;
+import Utils.ArrayUtils; 
 enum NodeRow { TOP, MIDDLE, HYBRID }
 
 public class Grid {
