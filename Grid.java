@@ -1,16 +1,16 @@
 import java.util.Arrays;
 import Utils.ArrayUtils; 
-enum NodeRow { TOP, MIDDLE, HYBRID }
 
 public class Grid {
 	public boolean[][] grid = new boolean[9][3];
-  
+	public GridPoint nextGridPoint = new GridPoint(0,0, 0.00d);
 	public static final int TOP_INDEX = 0;
 	public static final int MID_INDEX = 1;
 	public static final int BOTTOM_INDEX = 2;
 	
 	public String gridstring = ArrayUtils.Array2String(grid,3);
 
+	//#region VariousArraysAndStrings
 	public final int[][] PointPotential = new int[9][3];
 	public String PointPotentialString = ArrayUtils.Array2String(PointPotential,3);
 	
@@ -36,6 +36,7 @@ public class Grid {
 
 	public String CooperationBonusString = Boolean.toString(CooperationBonus);
 
+	//#endregion
 	public Grid() {
 		int i,k, val;
 		for (i=0; i<3; i++) {
@@ -59,20 +60,25 @@ public class Grid {
 		}
 		PointPotentialString = ArrayUtils.Array2String(PointPotential,3);
 	}
-
-	public void setNode(NodeRow row, int column, boolean value) {
+	/**
+	 * Sets the node at the specified row and column to the specified value
+	 * @param row Row to set value at (Use TOP_INDEX, MID_INDEX, or BOTTOM_INDEX constants)
+	 * @param column Column to set value at (1-9)
+	 * @param value Value to set node to (true or false)
+	 */
+	public void setNode(int row, int column, boolean value) {
 		if (column < 0) throw new java.lang.RuntimeException("Column greater than 0. Column passed: " + column);
 		if (column > 8) throw new java.lang.RuntimeException("Column greater than 0. Column passed: " + column);
 		
 		switch (row) {
-			case TOP:
-				grid[column][TOP_INDEX] = value;
+			case TOP_INDEX:
+				grid[column-1][TOP_INDEX] = value;
 				break;
-			case MIDDLE:
-				grid[column][MID_INDEX] = value;
+			case MID_INDEX:
+				grid[column-1][MID_INDEX] = value;
 				break;
-			case HYBRID:
-				grid[column][BOTTOM_INDEX] = value;
+			case BOTTOM_INDEX:
+				grid[column-1][BOTTOM_INDEX] = value;
 				break;
 		}
 		updateStrings();
@@ -100,8 +106,20 @@ public class Grid {
 
  class GridPoint {
 	public int xindex, yindex;
-	public GridPoint(int xi, int yi) {
+	public double score;
+	public GridPoint(int xi, int yi, double setscore) {
 		xindex = xi;
 		yindex = yi;
+		score = setscore;
+	}
+
+	public final double GetScore() {
+		return score;
+	}
+	public final int GetXPos() {
+		return xindex+1;
+	}
+	public final int GetYPos() {
+		return yindex+1;
 	}
 }

@@ -1,7 +1,6 @@
 import Utils.*;
 
 public class GridAnalyzer {
-    GridPoint bestPt;
     double ppw, dw, lw, cw, llw;
 
     double[][] calculatedScore = new double[9][3];
@@ -15,10 +14,16 @@ public class GridAnalyzer {
     }
     // k = x 
     // x = column
+
+    /**
+     * Reanalyzes inputted grid with initialized weights.
+     * @param grid Grid to be analyzed
+     * @param TeamScoredCoopertition True if the team scored coopertition points, false otherwise
+     */
     public void AnalyzeGrid(Grid grid, boolean TeamScoredCoopertition) {
         int i,k,l;
-        boolean l2, l1, r1, r2;
-        int DynamicCooperationLinks;
+        boolean l2 = true, l1 = true, r1 = true, r2 = true;
+        int DynamicCooperationLinks = 0;
         for (i = 0; i<3; i++) {
             for (k = 0; k<9; k++) {
                 switch(k) {
@@ -34,12 +39,12 @@ public class GridAnalyzer {
                         r2 = grid.grid[k+2][i];
                         r1 = grid.grid[k+1][i];
                         break;
-                    case 8:
+                    case 7:
                         r2 = false;
                         r1 = grid.grid[k+1][i];
                         l2 = grid.grid[k-2][i];
                         l1 = grid.grid[k-1][i];
-                    case 9:
+                    case 8:
                         r2 = false;
                         r1 = false;
                         r2 = grid.grid[k-2][i];
@@ -49,6 +54,8 @@ public class GridAnalyzer {
                     default:
                         l2 = grid.grid[k-2][i];
                         l1 = grid.grid[k-1][i];
+                        r2 = grid.grid[k+2][i];
+                        r1 = grid.grid[k+1][i];
                         break;
                     
                 }
@@ -120,9 +127,19 @@ public class GridAnalyzer {
                     else {
                         potentialVal2=0;
                     }
-                    grid.NextSpotPotential[k][i]=potentialVal*potentialVal2;
+                    grid.NextSpotPotential[k][i]=TypeUtils.round(potentialVal*potentialVal2, 4);
                 }
             }
         }
+        double valueOfMax = ArrayUtils.MaxOfArray(grid.NextSpotPotential, 3);
+
+        for (i=0; i<3; i++) {
+            for (k=0; k<9; k++) {
+                if (grid.NextSpotPotential[k][i] == valueOfMax) {
+                    grid.nextGridPoint = new GridPoint(k, i, valueOfMax);
+                }
+            }
+        }
+        grid.updateStrings();
     }
 }

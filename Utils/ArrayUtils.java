@@ -60,4 +60,17 @@ public class ArrayUtils {
         }
         return sum;
     }
+
+    public static final double MaxOfArray(double [][] array, int dimensions) {
+        int i, k;
+        double max = Integer.MIN_VALUE;
+        for (i=0; i<dimensions; i++) {
+            for (k=0; k<array.length; k++) {
+                if (array[k][i] > max) {
+                    max = array[k][i];
+                }
+            }
+        }
+        return max;
+    }
 }
