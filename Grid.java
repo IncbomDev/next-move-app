@@ -3,14 +3,14 @@ import Utils.ArrayUtils;
 
 public class Grid {
 	public boolean[][] grid = new boolean[9][3];
-	public GridPoint nextGridPoint = new GridPoint(0,0, 0.00d);
+	public GridPoint[] nextGridPoint = new GridPoint[9*3];
 	public static final int TOP_INDEX = 0;
 	public static final int MID_INDEX = 1;
 	public static final int BOTTOM_INDEX = 2;
 	
 	public String gridstring = ArrayUtils.Array2String(grid,3);
 
-	//#region VariousArraysAndStrings
+	//#region Various Arrays and Strings
 	public final int[][] PointPotential = new int[9][3];
 	public String PointPotentialString = ArrayUtils.Array2String(PointPotential,3);
 	

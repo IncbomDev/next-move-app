@@ -21,7 +21,10 @@ class Main {
     System.out.println("--------- Settings ---------");
     System.out.println("Cooperation Bonus: " + grid.CooperationBonusString);
     System.out.println("---------- Best Point to score ---------");
-    System.out.println("Best Point coords: (" + grid.nextGridPoint.GetXPos() + ", " + grid.nextGridPoint.GetYPos() + ")" + " with a score of " + grid.nextGridPoint.GetScore());
+    System.out.println("Best Points coords: \n";
+    for (int i = 0; i < grid.nextGridPoint.length; i++) {
+      System.out.println("Point " + i + ": (" + grid.nextGridPoint[i].GetXPos() + ", " + grid.nextGridPoint[i].GetYPos() + ") with a score of " + grid.nextGridPoint[i].GetScore());
+    }
   }
 }
 

@@ -73,4 +73,14 @@ public class ArrayUtils {
         }
         return max;
     }
+    public static final int NonNullLengthOfArray(GridPoint[] array) {
+        int i;
+        int length = 0;
+        for (i=0; i<array.length; i++) {
+            if (array[i] != null) {
+                length++;
+            }
+        }
+        return length;
+    }
 }

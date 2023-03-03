@@ -136,7 +136,7 @@ public class GridAnalyzer {
         for (i=0; i<3; i++) {
             for (k=0; k<9; k++) {
                 if (grid.NextSpotPotential[k][i] == valueOfMax) {
-                    grid.nextGridPoint = new GridPoint(k, i, valueOfMax);
+                    grid.nextGridPoint[grid.nextGridPoint] = new GridPoint(k, i, valueOfMax);
                 }
             }
         }
