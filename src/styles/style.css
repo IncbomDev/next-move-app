@@ -1,0 +1,12 @@
+#loading-screen{
+  display: block;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: white;
+}
+#loading-screen img {
+  position: absolute;
+}
