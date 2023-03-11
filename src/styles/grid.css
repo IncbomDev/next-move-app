@@ -4,7 +4,7 @@
     width: 3vw;
     height: 3vw;
     border-radius: 0.5vw;
-    background-color: gray;
+    background-color: rgb(255, 0, 0);
     display: inline-block;
     margin-left: 0.5vw;
     margin-top: 0.5vw;
@@ -29,9 +29,7 @@
 .nextGridBox:hover{
     background-color: rgb(165, 165, 165);
 }
-.gridbox:hover{
-    background-color: rgb(165, 165, 165);
-}
+
 
 .gridboxGreen:hover{
     background-color: rgb(255, 0, 0);
@@ -39,5 +37,9 @@
 
 .gridboxRed:hover{
     background-color: rgb(0, 255, 0);
+}
+
+.boxA1 {
+    background-color: rgb(255, 0, 0);
 }
 
