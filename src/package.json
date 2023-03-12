@@ -1,0 +1,24 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "views/main.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "window": {
+    "title": "Next Move App",
+    "icon": "assets/icon.png",
+    "toolbar": true,
+    "width": 5000,
+    "height": 5000,
+    "min_width": 5000,
+    "min_height": 5000,
+    "max_width": 5000,
+    "max_height": 5000,
+    "position": "mouse"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

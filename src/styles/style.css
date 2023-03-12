@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+:root{
+  --bg-color: rgb(20, 20, 20);
+}
+
+@keyframes fadeOut{
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+h1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: white;
+}
+
+#loading-screen{
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  opacity: 1;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: white;
+  overflow-x: hidden;
+}
+#head{
+  background-color: rgb(37, 37, 37);
+  border-bottom: 1px solid rgb(88, 88, 88);
+  height: 4vw;
+  float: top;
+}
+#title{
+  height: 4vw;
+  width: 12vw;
+  display: inline-block;
+  text-align: center;
+}
+.head-button{
+  display: inline-block;
+  width: 7vw;
+  height: 4vw;
+  border-left: 1px solid rgb(88, 88, 88);
+  border-right: 1px solid rgb(88, 88, 88);
+  text-align: center;
+  font-size: 1.5em;
+}
+.head-button button{
+  background-color: rgb(37, 37, 37);
+  color: white;
+  padding-top: 1.15vw;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 750;
+  border: none;
+  width: 7vw;
+  height: 4vw;
+  border-radius: 0;
+  transition: 0.2s;
+}
+.head-button button:hover{
+  background-color: rgb(88, 88, 88);
+  font-weight: 1500;
+}
+#loading-screen img {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+#main{
+  display: block;
+  margin-top: -20px;
+}
+
+#currentGrid{
+  padding-left: 20px;
+}
+.fadeOut{
+  animation: fadeOut 1s;
+  animation-fill-mode: forwards;
+}
