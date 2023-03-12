@@ -4,9 +4,98 @@ class GridBox{
         this.piecePlaced = piecePlaced;
         this.pointPotential = pointPotential;
         this.difficultyScore = difficultyScore;
-        this.dynamicCooperationBonus = this.dynamicCooperationBonus;
     }
 }
+
+// Constants
+const pointPotential = 0.5;
+const difficulty = 0.75;
+const locationConst = 1;
+const cooperation = 0.25
+const linkLocation = 1;
+
+function dynamicLocationScore() {
+    let A1dynamicLocationScore;
+    let A2dynamicLocationScore;
+    let A3dynamicLocationScore;
+    let A4dynamicLocationScore;
+    let A5dynamicLocationScore;
+    let A6dynamicLocationScore;
+    let A7dynamicLocationScore;
+    let A8dynamicLocationScore;
+    let A9dynamicLocationScore;
+
+    let B1dynamicLocationScore;
+    let B2dynamicLocationScore;
+    let B3dynamicLocationScore;
+    let B4dynamicLocationScore;
+    let B5dynamicLocationScore;
+    let B6dynamicLocationScore;
+    let B7dynamicLocationScore;
+    let B8dynamicLocationScore;
+    let B9dynamicLocationScore;
+
+    let C1dynamicLocationScore;
+    let C2dynamicLocationScore;
+    let C3dynamicLocationScore;
+    let C4dynamicLocationScore;
+    let C5dynamicLocationScore;
+    let C6dynamicLocationScore;
+    let C7dynamicLocationScore;
+    let C8dynamicLocationScore;
+    let C9dynamicLocationScore;
+
+}
+function calculateCooperationBonus() {
+    let A4bonus;
+    let A5bonus;
+    let A6bonus;
+
+    let B4bonus;
+    let B5bonus;
+    let B6bonus;
+
+    let C4bonus;
+    let C5bonus;
+    let C6bonus;
+
+    if(toIntA1 + toIntA2 + toIntA3 + toIntB1 + toIntB2 + toIntB3 + toIntC1 + toIntC2 + toIntC3<3){
+        A4bonus = 1;
+        A5bonus = 1;
+        A6bonus = 1;
+
+        B4bonus = 1;
+        B5bonus = 1;
+        B6bonus = 1;
+
+        C4bonus = 1;
+        C5bonus = 1;
+        C6bonus = 1;
+    } else {
+        A4bonus = 0;
+        A5bonus = 0;
+        A6bonus = 0;
+
+        B4bonus = 0;
+        B5bonus = 0;
+        B6bonus = 0;
+
+        C4bonus = 0;
+        C5bonus = 0;
+        C6bonus = 0;
+    } return {
+        A4bonus: A4bonus,
+        A5bonus: A5bonus,
+        A6bonus: A6bonus,
+        B4bonus: B4bonus,
+        B5bonus: B5bonus,
+        B6bonus: B6bonus,
+        C4bonus: C4bonus,
+        C5bonus: C5bonus,
+        C6bonus: C6bonus
+    }
+}
+
 
 var toIntA1;
 var toIntA2;
@@ -38,16 +127,16 @@ var toIntC7;
 var toIntC8;
 var toIntC9;
 
-
+var bonus = calculateCooperationBonus();
 
 var A1 = new GridBox("red", false, 5, 7, 0);var A2 = new GridBox("red", false, 5, 7, 0);var A3 = new GridBox("red", false, 5, 8, 0);
-var A4 = new GridBox("red", false, 5, 9);var A5 = new GridBox("red", false, 5, 10);var A6 = new GridBox("red", false, 5, 9);
+var A4 = new GridBox("red", false, 5, 9, bonus.A4bonus); var A5 = new GridBox("red", false, 5, 10, bonus.A5bonus);var A6 = new GridBox("red", false, 5, 9, bonus.A6bonus);
 var A7 = new GridBox("red", false, 5, 8, 0);var A8 = new GridBox("red", false, 5, 7, 0);var A9 = new GridBox("red", false, 5, 7, 0);
 var B1 = new GridBox("red", false, 3, 4, 0);var B2 = new GridBox("red", false, 3, 4, 0);var B3 = new GridBox("red", false, 3, 5, 0);
-var B4 = new GridBox("red", false, 3, 6);var B5 = new GridBox("red", false, 3, 7);var B6 = new GridBox("red", false, 3, 6);
+var B4 = new GridBox("red", false, 3, 6, bonus.B4bonus);var B5 = new GridBox("red", false, 3, 7, bonus.B5bonus);var B6 = new GridBox("red", false, 3, 6, bonus.B6bonus);
 var B7 = new GridBox("red", false, 3, 5, 0);var B8 = new GridBox("red", false, 3, 4, 0);var B9 = new GridBox("red", false, 3, 4, 0);
 var C1 = new GridBox("red", false, 2, 1, 0);var C2 = new GridBox("red", false, 2, 2, 0);var C3 = new GridBox("red", false, 2, 2, 0);
-var C4 = new GridBox("red", false, 2, 3);var C5 = new GridBox("red", false, 2, 4);var C6 = new GridBox("red", false, 2, 3);
+var C4 = new GridBox("red", false, 2, 3, bonus.C4bonus);var C5 = new GridBox("red", false, 2, 4, bonus.C5bonus);var C6 = new GridBox("red", false, 2, 3, bonus.C6bonus);
 var C7 = new GridBox("red", false, 2, 2, 0);var C8 = new GridBox("red", false, 2, 2, 0);var C9 = new GridBox("red", false, 2,1, 0);
 
 var gridArray = [A1, A2, A3, A4, A5, A6, A7, A8, A9, B1, B2, B3, B4, B5, B6, B7, B8, B9, C1, C2, C3, C4, C5, C6, C7, C8, C9];
@@ -96,10 +185,10 @@ function updateGrid() {
     if(A1.color == "green"){
         NextSpotA1.css("background-color", RED);
         toIntA1 = 1;
-        console.log("test");
     } else if(A1.color == "red"){
         toIntA1 = 0;
-        // continue with calc
+        NextSpotA1 = (pointPotential * toIntA1) + (difficulty * A1.pointPotential) + (locationConst * A1.difficultyScore) + (cooperation)
+
     }
 
     if(A2.color == "orange" || A2.color == "purple"){
@@ -190,42 +279,4 @@ function colorToNumber(col) {
     }
 }
 
-function calculateCooperationBonus() {
-    var A4bonus;
-    var A5bonus;
-    var A6bonus;
 
-    var B4bonus;
-    var B5bonus;
-    var B6bonus;
-
-    var C4bonus;
-    var C5bonus;
-    var C6bonus;
-
-    if(toIntA1 + toIntA2 + toIntA3 + toIntB1 + toIntB2 + toIntB3 + toIntC1 + toIntC2 + toIntC3<3){
-        A4bonus = 1;
-        A5bonus = 1;
-        A6bonus = 1;
-
-        B4bonus = 1;
-        B5bonus = 1;
-        B6bonus = 1;
-
-        C4bonus = 1;
-        C5bonus = 1;
-        C6bonus = 1;
-    } else {
-        A4bonus = 0;
-        A5bonus = 0;
-        A6bonus = 0;
-
-        B4bonus = 0;
-        B5bonus = 0;
-        B6bonus = 0;
-
-        C4bonus = 0;
-        C5bonus = 0;
-        C6bonus = 0;
-    }
-}
