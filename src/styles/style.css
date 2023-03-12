@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Jaldi&display=swap');
+
+
 :root{
-  --bg-color: rgb(20, 20, 20);
+  --bg-color: #171e35;
+  --header-color: rgb(40, 40, 40);
 }
 
 @keyframes fadeOut{
@@ -12,7 +16,61 @@
     opacity: 0;
   }
 }
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
 
+.header {
+  display: flex;
+  align-items: center;
+  background-color: var(--header-color);
+  height: 13vh;
+  padding: 0 20px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.button-container {
+  display: flex;
+  height: 13vh;
+  padding-right: 20px;
+  border-left: 1px solid white;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-color: var(--header-color);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  height: 13vh;
+  width: 10vw;
+  margin-right: -10px;
+  cursor: pointer;
+  border-right: 1px solid white;
+  transition: 0.3s ease-in-out;
+}
+
+.button:hover{
+  background-color: rgb(60, 60, 60);
+}
+
+.button:not(:last-child) {
+  margin-right: 0;
+}
 h1 {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.5em;
@@ -29,26 +87,29 @@ h1 {
 body{
   margin: 0;
   padding: 0;
-  background-color: var(--bg-color);
+  background-color: #171e35;
   color: white;
   overflow-x: hidden;
+  overflow-y: hidden;
+
 }
 #head{
-  background-color: rgb(37, 37, 37);
+  background-color: #0e1220;
   border-bottom: 1px solid rgb(88, 88, 88);
-  height: 4vw;
+  height: 13vh;
   float: top;
 }
 #title{
   height: 4vw;
-  width: 12vw;
+  width: 15vw;
   display: inline-block;
   text-align: center;
 }
 .head-button{
-  display: inline-block;
+  display: inline;
+  top: 0;
   width: 7vw;
-  height: 4vw;
+  height: 13vh;
   border-left: 1px solid rgb(88, 88, 88);
   border-right: 1px solid rgb(88, 88, 88);
   text-align: center;
@@ -77,7 +138,7 @@ body{
 }
 #main{
   display: block;
-  margin-top: -20px;
+  background-color: #171e35;
 }
 
 #currentGrid{
@@ -86,4 +147,16 @@ body{
 .fadeOut{
   animation: fadeOut 1s;
   animation-fill-mode: forwards;
+}
+#sideText{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  float: right;
+  margin-right: 20px;
+}
+#infoText{
+  font-family: "Jaldi", sans-serif;
 }
