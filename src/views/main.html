@@ -12,9 +12,10 @@
     <script src="../app/index.js"></script>
     <script src="../app/Interface.js"></script>
     <script src="../app/Grid.js"></script>
+    <script src="../app/Exporter.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <title>Next Move App</title>
-    <link rel="icon" href="../assets/favion.ico">
+    <link rel="icon" href="../assets/favicon.ico">
   </head>
   <body>
     <div id="loading-screen">
@@ -22,27 +23,32 @@
     </div>
     <div id="main">
       <header class="header">
-        <div class="title">Next Move App</div>
+        <div id="title">Next Move App</div>
         <div class="button-container">
-          <a href="#" class="button">options</a>
-          <a href="#" class="button">file</a>
-          <a href="#" class="button">more</a>
+          <a href="#" onclick="tab('options')" class="button" id="optionsTab">Options</a>
+          <a href="#" onclick="tab('file')" class="button" id="fileTab">File</a>
+          <a href="#" onclick="tab('more')" class="button" id="moreTab">More</a>
+        </div>
+        <div class="header-tabs">
+          <div id="header-tabs-options">
+            <div class="label">Other team scored coopertition bonus?</div>
+            <div id="checkbox" onclick="otherTeam()"></div>
+          </div>
+          <div id="header-tabs-file">
+            <h3>Input File</h3>
+            <input type="file" id="IMPORT" />
+            <button id="EXPORT">Export File</button>
+            <button>Export Settings</button>
+          </div>
+          <div id="header-tabs-more">
+            <button>Select Theme...</button>
+          </div>
         </div>
       </header>
-      <div id="interface">
-        <div id="infoText">
-                    <!-- <div id="sideText">
-            <h5>Key: <br> Green: Scored <br> Red: Not Scored <br> Purple: Cube on Hybrid <br> Orange: Cone on Hybrid</h5>
-          </div>   -->
-          
-        </div>
-          <label for="checkbox">Other team scored coopertition bonus?</label>
-          <input type="checkbox" id="otherTeamScoredCoopertitionBonus" />
-          <input type="text" id="nextGridSpotScore" placeholder="Next Grid Spot Score" />
-          <button id="submit">Calculate Grid Spot</button>
-          <h2>Current Grid</h2>
-      <div id="allGrids">
-        <div id="currentGrid">
+
+      <div class="grids">
+        <div class="grid-container">
+          <h1 class="grid-title">Current Grid</h1>
           <div id="gridlineA">
             <button id="boxA1" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxA2" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
@@ -76,15 +82,11 @@
             <button id="boxC8" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
             <button id="boxC9" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
           </div>
-          <br>
-          <button class="submitData" onclick="submitData()"><strong>Submit</strong></button>
         </div>
-        <br>
-        <br>
-        <br>
-        <h1>Next Move</h1>
-        <div id="nextMove">
-          <br>
+
+        <div class="grid-container">
+          <h1>Next Move</h1>
+          <div id="nextMove">
           <div id="nextGridA">
             <div id="nextGridA1" class="nextGridBox" onclick="printNextMove(this.id)"></div>
             <div id="nextGridA2" class="nextGridBox" onclick="printNextMove(this.id)"></div>
@@ -120,7 +122,7 @@
           </div>
         </div>
       </div>
-    </div>
+      </div>
     </div>
   </body>
 </html>

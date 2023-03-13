@@ -2,6 +2,9 @@
 #interface{
     text-align: center;
 }
+.grid-container{
+    text-align: center;
+}
 .gridbox{
     width: 3vw;
     height: 3vw;
