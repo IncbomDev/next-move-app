@@ -1,9 +1,11 @@
 class GridBox{
-    constructor(color, piecePlaced, pointPotential, difficultyScore, dynamicCooperationBonus){
+    constructor(color, piecePlaced, pointPotential, difficultyScore, dynamicCooperationBonus, dynamicLocationScore){
         this.color = color;
         this.piecePlaced = piecePlaced;
         this.pointPotential = pointPotential;
         this.difficultyScore = difficultyScore;
+        this.dynamicCooperationBonus = dynamicCooperationBonus;
+        this.dynamicLocationScore = dynamicLocationScore;
     }
 }
 
@@ -14,61 +16,6 @@ const locationConst = 1;
 const cooperation = 0.25
 const linkLocation = 1;
 
-function dynamicLocationScore() {
-    let A1dynamicLocationScore;
-    let A2dynamicLocationScore;
-    let A3dynamicLocationScore;
-    let A4dynamicLocationScore;
-    let A5dynamicLocationScore;
-    let A6dynamicLocationScore;
-    let A7dynamicLocationScore;
-    let A8dynamicLocationScore;
-    let A9dynamicLocationScore;
-
-    let B1dynamicLocationScore;
-    let B2dynamicLocationScore;
-    let B3dynamicLocationScore;
-    let B4dynamicLocationScore;
-    let B5dynamicLocationScore;
-    let B6dynamicLocationScore;
-    let B7dynamicLocationScore;
-    let B8dynamicLocationScore;
-    let B9dynamicLocationScore;
-
-    let C1dynamicLocationScore;
-    let C2dynamicLocationScore;
-    let C3dynamicLocationScore;
-    let C4dynamicLocationScore;
-    let C5dynamicLocationScore;
-    let C6dynamicLocationScore;
-    let C7dynamicLocationScore;
-    let C8dynamicLocationScore;
-    let C9dynamicLocationScore;
-
-    if(toIntA1 > 0) {
-        A1dynamicLocationScore = 0;
-    } else {
-        A1dynamicLocationScore = (toIntA2) + (toIntA3 / 2)
-    }
-
-    if(toIntA2 > 0) {
-        A2dynamicLocationScore = 0;
-    } else {
-        A2dynamicLocationScore = (toIntA1 + toIntA3) + (toIntA4 / 2)
-    }
-
-    if(toIntA3 > 0) {
-        A3dynamicLocationScore = 0;
-    } else {
-        A3dynamicLocationScore = (toIntA2 + toIntA4) + ((toIntA5 / 2) + (toIntA1 / 2))
-    }
-
-    if(toIntA4 > 0) {
-        A4dynamicLocationScore = 0;
-    } else {
-        A4dynamicLocationScore = (toIntA3 + toIntA5) + ((toIntA6 / 2) + (toIntA2 / 2))
-    }
-}
 function calculateCooperationBonus() {
     let A4bonus;
     let A5bonus;
@@ -151,8 +98,9 @@ var toIntC8;
 var toIntC9;
 
 var bonus = calculateCooperationBonus();
+var dynLoc = dynamicLocationScore();
 
-var A1 = new GridBox("red", false, 5, 7, 0);var A2 = new GridBox("red", false, 5, 7, 0);var A3 = new GridBox("red", false, 5, 8, 0);
+var A1 = new GridBox("red", false, 5, 7, 0, dynLoc.A1dynamicLocationScore);var A2 = new GridBox("red", false, 5, 7, 0, dynLoc.A2dynamicLocationScore);var A3 = new GridBox("red", false, 5, 8, 0, dynLoc.A3dynamicLocationScore);
 var A4 = new GridBox("red", false, 5, 9, bonus.A4bonus); var A5 = new GridBox("red", false, 5, 10, bonus.A5bonus);var A6 = new GridBox("red", false, 5, 9, bonus.A6bonus);
 var A7 = new GridBox("red", false, 5, 8, 0);var A8 = new GridBox("red", false, 5, 7, 0);var A9 = new GridBox("red", false, 5, 7, 0);
 var B1 = new GridBox("red", false, 3, 4, 0);var B2 = new GridBox("red", false, 3, 4, 0);var B3 = new GridBox("red", false, 3, 5, 0);
@@ -173,7 +121,7 @@ function updateGrid() {
     for(var k = 0; k < 3; k++){var CL = document.getElementById(`box${letters[i]}${nums[j]}`).classList;
     if(CL.contains(`gridbox${colors[k].charAt(0).toUpperCase() + colors[k].slice(1)}`)){
     eval(letters[i]+nums[j]).color = colors[k];}}}}
-
+        alert(dynLoc.A1dynamicLocationScore);
     var NextSpotA1 = $("#nextGridA1"); //.getComputedStyle("background-color");
     var NextSpotA2 = $("#nextGridA2");
     var NextSpotA3 = $("#nextGridA3");
@@ -203,6 +151,232 @@ function updateGrid() {
     var NextSpotC7 = $("#nextGridC7");
     var NextSpotC8 = $("#nextGridC8");
     var NextSpotC9 = $("#nextGridC9");
+
+    function dynamicLocationScore() { //TODO: Move this up to top of code
+        let A1dynamicLocationScore;
+        let A2dynamicLocationScore;
+        let A3dynamicLocationScore;
+        let A4dynamicLocationScore;
+        let A5dynamicLocationScore;
+        let A6dynamicLocationScore;
+        let A7dynamicLocationScore;
+        let A8dynamicLocationScore;
+        let A9dynamicLocationScore;
+    
+        let B1dynamicLocationScore;
+        let B2dynamicLocationScore;
+        let B3dynamicLocationScore;
+        let B4dynamicLocationScore;
+        let B5dynamicLocationScore;
+        let B6dynamicLocationScore;
+        let B7dynamicLocationScore;
+        let B8dynamicLocationScore;
+        let B9dynamicLocationScore;
+    
+        let C1dynamicLocationScore;
+        let C2dynamicLocationScore;
+        let C3dynamicLocationScore;
+        let C4dynamicLocationScore;
+        let C5dynamicLocationScore;
+        let C6dynamicLocationScore;
+        let C7dynamicLocationScore;
+        let C8dynamicLocationScore;
+        let C9dynamicLocationScore;
+    
+        if(toIntA1 > 0) {
+            A1dynamicLocationScore = 0;
+        } else {
+            A1dynamicLocationScore = (toIntA2) + (toIntA3 / 2)
+        }
+    
+        if(toIntA2 > 0) {
+            A2dynamicLocationScore = 0;
+        } else {
+            A2dynamicLocationScore = (toIntA1 + toIntA3) + (toIntA4 / 2)
+        }
+    
+        if(toIntA3 > 0) {
+            A3dynamicLocationScore = 0;
+        } else {
+            A3dynamicLocationScore = (toIntA2 + toIntA4) + ((toIntA5 / 2) + (toIntA1 / 2))
+        }
+        
+        if(toIntA4 > 0) {
+            A4dynamicLocationScore = 0;
+        } else {
+            A4dynamicLocationScore = (toIntA3 + toIntA5) + ((toIntA6 / 2) + (toIntA2 / 2))
+        }
+    
+        if(toIntA5 > 0) {
+            A5dynamicLocationScore = 0;
+        } else {
+            A4dynamicLocationScore = (toIntA4 + toIntA6) + ((toIntA7 / 2) + (toIntA3 / 2))
+        }
+    
+        if(toIntA6 > 0) {
+            A6dynamicLocationScore = 0;
+        } else {
+            A6dynamicLocationScore = (toIntA5 + toIntA7) + ((toIntA8 / 2) + (toIntA4 / 2))
+        }
+    
+        if(toIntA7 > 0) {
+            A7dynamicLocationScore = 0;
+        } else {
+            A7dynamicLocationScore = (toIntA6 + toIntA8) + ((toIntA9 / 2) + (toIntA5 / 2))
+        }
+    
+        if(toIntA8 > 0) {
+            A8dynamicLocationScore = 0;
+        } else {
+            A8dynamicLocationScore = (toIntA7 + toIntA9) + (toIntA6 / 2)
+        }
+    
+        if(toIntA9 > 0) {
+            A9dynamicLocationScore = 0;
+        } else {
+            A9dynamicLocationScore = (toIntA8) + (toIntA7 / 2)
+        }
+    
+        if(toIntB1 > 0) {
+            B1dynamicLocationScore = 0;
+        } else {
+            B1dynamicLocationScore = (toIntB2) + (toIntB3 / 2)
+        }
+    
+        if(toIntB2 > 0) {
+            B2dynamicLocationScore = 0;
+        } else {
+            B2dynamicLocationScore = (toIntB1 + toIntB3) + (toIntB4 / 2)
+        }
+    
+        if(toIntB3 > 0) {
+            B3dynamicLocationScore = 0;
+        } else {
+            B3dynamicLocationScore = (toIntB2 + toIntB4) + ((toIntB5 / 2) + (toIntB1 / 2))
+        }
+    
+        if(toIntB4 > 0) {
+            B4dynamicLocationScore = 0;
+        } else {
+            B4dynamicLocationScore = (toIntB3 + toIntB5) + ((toIntB6 / 2) + (toIntB2 / 2))
+        }
+    
+        if(toIntB5 > 0) {
+            B5dynamicLocationScore = 0;
+        } else {
+            B5dynamicLocationScore = (toIntB4 + toIntB6) + ((toIntB7 / 2) + (toIntB3 / 2))
+        }
+    
+        if(toIntB6 > 0) {
+            B6dynamicLocationScore = 0;
+        } else { 
+            B6dynamicLocationScore = (toIntB5 + toIntB7) + ((toIntB8 / 2) + (toIntB4 / 2))
+        }
+    
+        if(toIntB7 > 0) {
+            B7dynamicLocationScore = 0;
+        } else {
+            B7dynamicLocationScore = (toIntB6 + toIntB8) + ((toIntB9 / 2) + (toIntB5 / 2))
+        } 
+    
+        if(toIntB8 > 0) {
+            B8dynamicLocationScore = 0;
+        } else {
+            B8dynamicLocationScore = (toIntB7 + toIntB9) + (toIntB6 / 2)
+        }
+    
+        if(toIntB9 > 0) {
+            B9dynamicLocationScore = 0;
+        } else {
+            B9dynamicLocationScore = (toIntB8) + (toIntB7 / 2)
+        }
+    
+        if(toIntC1 > 0) {
+            C1dynamicLocationScore = 0;
+        } else {
+            C1dynamicLocationScore = (toIntC2) + (toIntC3 / 2)
+        }
+    
+        if(toIntC2 > 0) {
+            C2dynamicLocationScore = 0;
+        } else {
+            C2dynamicLocationScore = (toIntC1 + toIntC3) + (toIntC4 / 2)
+        }
+    
+        if(toIntC3 > 0) {
+            C3dynamicLocationScore = 0;
+        } else {
+            C3dynamicLocationScore = (toIntC2 + toIntC4) + ((toIntC5 / 2) + (toIntC1 / 2))
+        }
+    
+        if(toIntC4 > 0) {
+            C4dynamicLocationScore = 0;
+        } else {
+            C4dynamicLocationScore = (toIntC3 + toIntC5) + ((toIntC6 / 2) + (toIntC2 / 2))
+        }
+    
+        if(toIntC5 > 0) {
+            C5dynamicLocationScore = 0;
+        } else {
+            C5dynamicLocationScore = (toIntC4 + toIntC6) + ((toIntC7 / 2) + (toIntC3 / 2))
+        }
+        
+        if(toIntC6 > 0) {
+            C6dynamicLocationScore = 0;
+        } else {
+            C6dynamicLocationScore = (toIntC5 + toIntC7) + ((toIntC8 / 2) + (toIntC4 / 2))
+        }
+    
+        if(toIntC7 > 0) {
+            C7dynamicLocationScore = 0;
+        } else {
+            C7dynamicLocationScore = (toIntC6 + toIntC8) + ((toIntC9 / 2) + (toIntC5 / 2))
+        }
+    
+        if(toIntC8 > 0) {
+            C8dynamicLocationScore = 0;
+        } else {
+            C8dynamicLocationScore = (toIntC7 + toIntC9) + (toIntC6 / 2)
+        }
+    
+        if(toIntC9 > 0) {
+            C9dynamicLocationScore = 0;
+        } else {
+            C9dynamicLocationScore = (toIntC8) + (toIntC7 / 2)
+        } return {
+            A1dynamicLocationScore,
+            A2dynamicLocationScore,
+            A3dynamicLocationScore,
+            A4dynamicLocationScore,
+            A5dynamicLocationScore,
+            A6dynamicLocationScore,
+            A7dynamicLocationScore,
+            A8dynamicLocationScore,
+            A9dynamicLocationScore,
+    
+            B1dynamicLocationScore,
+            B2dynamicLocationScore,
+            B3dynamicLocationScore,
+            B4dynamicLocationScore,
+            B5dynamicLocationScore,
+            B6dynamicLocationScore,
+            B7dynamicLocationScore,
+            B8dynamicLocationScore,
+            B9dynamicLocationScore,
+    
+            C1dynamicLocationScore,
+            C2dynamicLocationScore,
+            C3dynamicLocationScore,
+            C4dynamicLocationScore,
+            C5dynamicLocationScore,
+            C6dynamicLocationScore,
+            C7dynamicLocationScore,
+            C8dynamicLocationScore,
+            C9dynamicLocationScore
+    
+        }
+    
+    }
 
 
     if(A1.color == "green"){
