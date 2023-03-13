@@ -1,54 +1,68 @@
 function gridClickHandlerHybrid(a){
     var box = $("#"+a);
-    if(box.css("background-color") == "rgb(255,0,0)"){
-        box.css("background-color", "rgb(201, 98, 1)");
+    if(box.css("background-color") == RED){
+        box.css("background-color", ORANGE);
         box.addClass("gridboxOrange");
         box.removeClass("gridboxRed");
-        colorToBoolean();
-    }else if(box.css("background-color") == "rgb(201, 98, 1)"){
-        box.css("background-color", "rgb(235, 9, 212)");
+    }else if(box.css("background-color") == ORANGE){
+        box.css("background-color", PURPLE);
         box.addClass("gridboxPurple");
         box.removeClass("gridboxOrange");
-        colorToInt();
     }else if (box.css("background-color") == "rgb(235, 9, 212)"){
-        box.css("background-color", "rgb(0, 255, 0)");
+        box.css("background-color", RED);
         box.addClass("gridboxRed");
-        colorToInt();
     }
+    updateGrid();
+    calculateCooperationBonus();
+    
 }
 function gridClickHandler(a){
     var box = $("#"+a);
-    if(box.css("background-color") == "rgb(0, 255, 0)"){
-        box.css("background-color", "rgb(255, 0, 0)");
+    if(box.css("background-color") == GREEN){
+        box.css("background-color", RED);
         box.addClass("gridboxRed");
         box.removeClass("gridboxGreen");
-    }else if(box.css("background-color") == "rgb(255, 0, 0)"){
-        box.css("background-color", "rgb(0, 255, 0)");
+        
+    }else if(box.css("background-color") == RED){
+        box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
     }else{
-        box.css("background-color", "rgb(0, 255, 0)");
+        box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
     }
-}
-function colorToInt(){
-    const A1 = document.getElementById("A1").getComputedStyle("background-color");
-
-if(A1 === "rgb(0, 255, 0)"){
-    var piecePlacedA1 = 1;
-    alert(piecePlacedA1);
-}else if(A1 === "rgb(255, 0, 0)"){
-    var piecePlacedA1 = 0;  
-    alert(piecePlacedA1);
-}
-
-}
-function calculate(){
-    var box = $("#"+a);
-
-    
+    updateGrid();
+    calculateCooperationBonus();
 }
 
 function printNextSpot(){
     var nextSpot = getNextSpot();
     $("#nextSpot").html(nextSpot);
+}
+
+function tab(t){
+    if(t == "options"){
+        $("#header-tabs-options").css("display", "block");
+        $("#header-tabs-file").css("display", "none");
+        $("#header-tabs-more").css("display", "none");
+
+        $("#optionsTab").addClass("selected");
+        $("#gridTab").removeClass("selected");
+        $("#moreTab").removeClass("selected");
+    }else if(t == "file"){
+        $("#header-tabs-options").css("display", "none");
+        $("#header-tabs-file").css("display", "block");
+        $("#header-tabs-more").css("display", "none");
+
+        $("#optionsTab").removeClass("selected");
+        $("#fileTab").addClass("selected");
+        $("#moreTab").removeClass("selected");
+    }else if(t == "more"){
+        $("#header-tabs-options").css("display", "none");
+        $("#header-tabs-file").css("display", "none");
+        $("#header-tabs-more").css("display", "block");
+
+        $("#optionsTab").removeClass("selected");
+        $("#fileTab").removeClass("selected");
+        $("#moreTab").addClass("selected");
+    }
 }
