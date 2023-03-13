@@ -37,7 +37,7 @@
           
         </div>
           <label for="checkbox">Other team scored coopertition bonus?</label>
-          <input type="checkbox" id="otherTeamScoredCoopertitionBonus" />
+          <input onClick="updateCooperationBonus()" type="checkbox" id="otherTeamScoredCoopertitionBonus" />
           <input type="text" id="nextGridSpotScore" placeholder="Next Grid Spot Score" />
           <button id="submit">Calculate Grid Spot</button>
           <h2>Current Grid</h2>
@@ -45,39 +45,38 @@
         <div id="currentGrid">
           <div id="gridlineA">
             <button id="boxA1" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA2" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
+            <button id="boxA2" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxA3" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxA4" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA5" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
+            <button id="boxA5" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxA6" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxA7" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA8" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
+            <button id="boxA8" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxA9" class="gridbox" onclick="gridClickHandler(this.id)"></button>
           </div>
           <div id="gridlineB">
             <button id="boxB1" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB2" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
+            <button id="boxB2" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxB3" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxB4" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB5" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
+            <button id="boxB5" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxB6" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxB7" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB8" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
+            <button id="boxB8" class="gridbox" onclick="gridClickHandler(this.id)"></button>
             <button id="boxB9" class="gridbox" onclick="gridClickHandler(this.id)"></button>
           </div>
           <div id="gridlineC">
-            <button id="boxC1" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
-            <button id="boxC2" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
-            <button id="boxC3" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
-            <button id="boxC4" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
-            <button id="boxC5" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
-            <button id="boxC6" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
-            <button id="boxC7" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
-            <button id="boxC8" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
-            <button id="boxC9" class="gridbox" onclick="gridClickHandlerHybrid(this.id)"></button>
+            <button id="boxC1" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC2" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC3" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC4" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC5" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC6" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC7" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC8" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC9" class="gridbox" onclick="gridClickHandler(this.id)"></button>
           </div>
           <br>
-          <button class="submitData" onclick="submitData()"><strong>Submit</strong></button>
         </div>
         <br>
         <br>
