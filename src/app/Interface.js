@@ -38,3 +38,31 @@ function printNextSpot(){
     var nextSpot = getNextSpot();
     $("#nextSpot").html(nextSpot);
 }
+
+function tab(t){
+    if(t == "options"){
+        $("#header-tabs-options").css("display", "block");
+        $("#header-tabs-file").css("display", "none");
+        $("#header-tabs-more").css("display", "none");
+
+        $("#optionsTab").addClass("selected");
+        $("#gridTab").removeClass("selected");
+        $("#moreTab").removeClass("selected");
+    }else if(t == "file"){
+        $("#header-tabs-options").css("display", "none");
+        $("#header-tabs-file").css("display", "block");
+        $("#header-tabs-more").css("display", "none");
+
+        $("#optionsTab").removeClass("selected");
+        $("#fileTab").addClass("selected");
+        $("#moreTab").removeClass("selected");
+    }else if(t == "more"){
+        $("#header-tabs-options").css("display", "none");
+        $("#header-tabs-file").css("display", "none");
+        $("#header-tabs-more").css("display", "block");
+
+        $("#optionsTab").removeClass("selected");
+        $("#fileTab").removeClass("selected");
+        $("#moreTab").addClass("selected");
+    }
+}

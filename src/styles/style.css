@@ -1,13 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Jaldi&display=swap');
-
-
-:root{
-  --bg-color: #171e35;
-  --header-color: rgb(40, 40, 40);
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
 }
-
+:root{
+  --bg-color: rgb(20, 20, 20);
+  --header-color: rgb(40, 40, 40);
+  --header-height: 10vh;
+}
+@media screen and (max-width: 600px) {
+  :root {
+    --header-height: 15vh;
+  }
+}
 @keyframes fadeOut{
   0%{
     opacity: 1;
@@ -17,35 +24,27 @@
   }
 }
 body {
+  font-family: 'San Francisco', sans-serif;
   background-color: black;
   color: white;
   margin: 0;
   padding: 0;
 }
-
 .header {
   display: flex;
   align-items: center;
   background-color: var(--header-color);
-  height: 13vh;
+  height: var(--header-height);
   padding: 0 20px;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
 }
-
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-right: 20px;
-}
-
 .button-container {
   display: flex;
-  height: 13vh;
+  height: var(--header-height);
   padding-right: 20px;
   border-left: 1px solid white;
 }
-
 .button {
   display: inline-flex;
   align-items: center;
@@ -56,28 +55,29 @@ body {
   text-align: center;
   text-decoration: none;
   font-size: 16px;
-  height: 13vh;
+  height: var(--header-height);
   width: 10vw;
   margin-right: -10px;
   cursor: pointer;
   border-right: 1px solid white;
   transition: 0.3s ease-in-out;
 }
-
 .button:hover{
   background-color: rgb(60, 60, 60);
 }
-
 .button:not(:last-child) {
   margin-right: 0;
 }
 h1 {
-  font-family: 'JetBrains Mono', monospace;
   font-size: 1.5em;
   font-weight: 700;
   color: white;
 }
-
+#title{
+  font-size: 2vh;
+  font-weight: bold;
+  margin-right: 20px;
+}
 #loading-screen{
   display: block;
   width: 100vw;
@@ -87,16 +87,15 @@ h1 {
 body{
   margin: 0;
   padding: 0;
-  background-color: #171e35;
+  background-color: var(--bg-color);
   color: white;
   overflow-x: hidden;
   overflow-y: hidden;
-
 }
 #head{
-  background-color: #0e1220;
+  background-color: var(--header-color);
   border-bottom: 1px solid rgb(88, 88, 88);
-  height: 13vh;
+  height: var(--header-height);
   float: top;
 }
 #title{
@@ -104,12 +103,14 @@ body{
   width: 15vw;
   display: inline-block;
   text-align: center;
+  font-size: 1.5em;
+  padding-top: 1.5vw;
 }
 .head-button{
   display: inline;
   top: 0;
   width: 7vw;
-  height: 13vh;
+  height: var(--header-height);
   border-left: 1px solid rgb(88, 88, 88);
   border-right: 1px solid rgb(88, 88, 88);
   text-align: center;
@@ -133,23 +134,20 @@ body{
 }
 #loading-screen img {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 #main{
   display: block;
-  background-color: #171e35;
-}
-
-#currentGrid{
-  padding-left: 20px;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
 }
 .fadeOut{
   animation: fadeOut 1s;
   animation-fill-mode: forwards;
 }
 #sideText{
-  font-family: "JetBrains Mono", monospace;
   font-size: 1.5em;
   font-weight: 700;
   color: white;
@@ -159,4 +157,19 @@ body{
 }
 #infoText{
   font-family: "Jaldi", sans-serif;
+}
+#checkbox{
+  width: 2vw;
+  height: 2vw;
+  border-radius: 0.5vw;
+  background-color: white;
+}
+#header-tabs-file{
+  display: none;
+}
+#header-tabs-more{
+  display: none;
+}
+.selected{
+  background-color: gray;
 }
