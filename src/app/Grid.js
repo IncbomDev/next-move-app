@@ -45,6 +45,29 @@ function dynamicLocationScore() {
     let C8dynamicLocationScore;
     let C9dynamicLocationScore;
 
+    if(toIntA1 > 0) {
+        A1dynamicLocationScore = 0;
+    } else {
+        A1dynamicLocationScore = (toIntA2) + (toIntA3 / 2)
+    }
+
+    if(toIntA2 > 0) {
+        A2dynamicLocationScore = 0;
+    } else {
+        A2dynamicLocationScore = (toIntA1 + toIntA3) + (toIntA4 / 2)
+    }
+
+    if(toIntA3 > 0) {
+        A3dynamicLocationScore = 0;
+    } else {
+        A3dynamicLocationScore = (toIntA2 + toIntA4) + ((toIntA5 / 2) + (toIntA1 / 2))
+    }
+
+    if(toIntA4 > 0) {
+        A4dynamicLocationScore = 0;
+    } else {
+        A4dynamicLocationScore = (toIntA3 + toIntA5) + ((toIntA6 / 2) + (toIntA2 / 2))
+    }
 }
 function calculateCooperationBonus() {
     let A4bonus;
