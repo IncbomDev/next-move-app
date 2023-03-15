@@ -29,9 +29,11 @@ class GridAnalyzer {
     this.cw = CooperationWeight;
     this.llw = LinkLocationWeight;
     this.grid = grid;
+  
+
   }
   AnalyzeGrid() {
-    let i, k, l;
+    let i,k,l;
     let l2 = true, l1 = true, r1 = true, r2 = true;
     var DynamicCooperationLinks = 0;
     for (i = 0; i<3; i++) {

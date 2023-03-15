@@ -41,8 +41,6 @@ class Grid{
         this.nextSpotPotential = newArray(3,9);
         console.log(this.nextSpotPotential);
 
-        
-
         this.cooperationBonus = false; 
 
         var i = 0, k = 0, val = 0;
@@ -230,7 +228,7 @@ class GridAnalyzer {
                 else {
                     potentialVal2=0;
                 }
-                this.grid.outPutGrid[i][k] = potentialVal+potentialVal2;
+                this.grid.outputGrid[i][k] = potentialVal+potentialVal2;
             }
         }
     }
@@ -245,7 +243,6 @@ class GridAnalyzer {
   }
 }
 
-
 window.onload = function() {
     var thegrid = new Grid();
     var analyzer = new GridAnalyzer(thegrid);
@@ -254,9 +251,9 @@ window.onload = function() {
 function updateCooperationBonus() {
     if (cooperationBonus === true) {
         cooperationBonus = false;
-        console.log("Cooperation Bonus: " + cooperationBonus)
+        console.print("Cooperation Bonus: " + cooperationBonus)
     } else if (cooperationBonus === false) {
         cooperationBonus = true;
-        console.log("Cooperation Bonus: " + cooperationBonus)
+        console.print("Cooperation Bonus: " + cooperationBonus)
     }
 }

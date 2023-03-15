@@ -1,7 +1,8 @@
 //get T/F values from current grid.
 function GetBooleanValues(){
 }
-const analyzer = new GridAnalyzer();
+var TestGrid = [true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, ];
+var analyzer = new GridAnalyzer(TestGrid);
 function GStoHex(gs){
     if(gs < 1){
         return "#ffffff";
