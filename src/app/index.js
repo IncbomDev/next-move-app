@@ -1,5 +1,3 @@
-
-
 setTimeout(function(){
   document.getElementById("loading-screen").classList.add("fadeOut");
   setTimeout(function(){
@@ -9,5 +7,3 @@ setTimeout(function(){
     document.body.style.overflowY = 'scroll';
   },1000);
 }, 2000);
-
-

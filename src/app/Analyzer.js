@@ -1,5 +1,10 @@
-var bool = true;
-var boolean = bool;
+function SumOfArray(array) {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+        sum += array[i];
+    }
+    return sum;
+}
 
 function Boolean2Double(boolean) {
     if (bool) {
@@ -24,12 +29,10 @@ class GridAnalyzer {
     this.cw = CooperationWeight;
     this.llw = LinkLocationWeight;
     this.grid = grid;
-  
-
   }
   AnalyzeGrid() {
-    this.i,k,l;
-    this.l2 = true, l1 = true, r1 = true, r2 = true;
+    let i, k, l;
+    let l2 = true, l1 = true, r1 = true, r2 = true;
     var DynamicCooperationLinks = 0;
     for (i = 0; i<3; i++) {
         for (k = 0; k<9; k++) {
@@ -79,8 +82,69 @@ class GridAnalyzer {
                 this.grid.DynamicLinkStart[i][k] = 0;
             }
         }
-        
-
+        if (Boolean2Int(this.grid.grid[i][0])+Boolean2Int(this.grid.grid[i][1])+Boolean2Int(this.grid.grid[i][2])==2) {
+            for (l=0;l<l+3; l++) {
+                if(this.grid.grid[i][k]==false) {
+                    this.grid.DynamicLinkLoc[i][k];
+                }
+            }
+        }
+        else if (Boolean2Int(this.grid.grid[i][3])+Boolean2Int(this.grid.grid[i][4])+Boolean2Int(this.grid.grid[i][5])==2) { 
+            for (l=0;l<l+3; l++) {
+                if(this.grid.grid[i][k]==false) {
+                    this.grid.DynamicLinkLoc[i][k];
+                }
+            }
+        }
+        else if (Boolean2Int(this.grid.grid[i][6])+Boolean2Int(this.grid.grid[i][7])+Boolean2Int(this.grid.grid[i][8])==2) {
+            for (l=0;l<l+3; l++) {
+                if(this.grid.grid[i][k]==false) {
+                    this.grid.DynamicLinkLoc[i][k];
+                }
+            }
+        }
+        for (l=3; l<=5; l++) {
+            if (grid.grid[i][l] == true) {
+                 DynamicCooperationLinks++;
+            } 
+        }
+    }
+    if (DynamicCooperationLinks < 3) {
+        for (i=0; i<3; i++) {
+            for (k=3; k<6; k++) {
+                if (grid.grid[i][k] == false) {
+                    grid.DynamicLinkLoc[i][k] = 1;
+                }
+            }
+        }
+    }
+    for(i=0; i<3; i++) {
+        for(k=0; k<9; k++) {
+            if (this.grid.grid[i][k] == true) {
+                this.grid.outputGrid[i][k]=0;
+            }
+            else {
+                let potentialVal = this.ppw*this.grid.pointPotential[i][k]+this.dw*this.grid.difficult[i][k]+this.lw*this.grid.dynamicLocScores[i][k]+this.cw*this.grid.cooperation[i][k]+this.llw*this.grid.dynamicLinkLoc[i][k];
+                let potentialVal2 = 0, val1=0;
+                if (this.grid.cooperationBonus[i][k] == true && SumOfArray(grid.DynamicCooperationLinks[i]) == 0) { val1=5;}
+                else {val1=5;}
+                if (SumOfArray(grid.DynamicLinkStart<val1)) {
+                    potentialVal2=1;
+                }
+                else {
+                    potentialVal2=0;
+                }
+                this.grid.outPutGrid[i][k] = potentialVal+potentialVal2;
+            }
+        }
+    }
+    let max = 0;
+    for (i=0; i<3; i++) { 
+        for (k=0; k<9; k++) {
+            if (this.grid.outputGrid[i][k] > max) {
+                max = this.grid.outputGrid[i][k];
+            }
+        }
     }
   }
 }

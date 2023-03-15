@@ -1,3 +1,34 @@
+//get T/F values from current grid.
+function GetBooleanValues(){
+}
+const analyzer = new GridAnalyzer();
+function GStoHex(gs){
+    if(gs < 1){
+        return "#ffffff";
+    }else if(1 < gs && gs < 2){
+        return "#b6f2c1";
+    }else if(2 < gs && gs < 2.5){
+        return "#74eb6e";
+    }else if(2.5 < gs){
+        return "#37f02e";
+    }
+}
+function conv(num){
+    if(num == 1){
+        return 'A';
+    }else if(num == 2){
+        return 'B';
+    }else{
+        return 'C';
+    }
+}
+function RenderNewGrid(a) {
+    for(var i = 1; i < 4; i++)
+    for(var k = 1; k < 10; k++){
+        $(`#nextGrid${conv(i) + k}`).css("background-color", GStoHex(a[i*k]));
+    }
+}
+
 function gridClickHandlerHybrid(a){
     var box = $("#"+a);
     if(box.css("background-color") == RED){
@@ -12,9 +43,7 @@ function gridClickHandlerHybrid(a){
         box.css("background-color", RED);
         box.addClass("gridboxRed");
     }
-    updateGrid();
-    calculateCooperationBonus();
-    
+    analyzer.AnalyzeGrid();
 }
 function gridClickHandler(a){
     var box = $("#"+a);
@@ -30,8 +59,7 @@ function gridClickHandler(a){
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
     }
-    updateGrid();
-    calculateCooperationBonus();
+    analyzer.AnalyzeGrid();
 }
 
 function printNextSpot(){
