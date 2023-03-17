@@ -197,11 +197,11 @@ class GridAnalyzer {
                     let potentialVal = this.ppw * this.gridA.pointPotential[i][k] + this.dw * this.gridA.difficulty[i][k] + this.lw * this.gridA.dynamicLocScore[i][k] + this.cw * this.gridA.dynamicCooperationBonus[i][k] + this.llw * this.gridA.dynamicLinkLoc[i][k];
                     let potentialVal2 = 0,
                         val1 = 0;
-                    /*if (this.gridA.dynamicCooperationBonus[i][k] == true && SumOfArray(this.gridA.DynamicCooperationLinks[i]) == 0) {
+                    if (this.gridA.dynamicCooperationBonus[i][k] == true && SumOfArray(this.gridA.DynamicCooperationLinks[i]) == 0) {
                         val1 = 5;
                     } else {
-                        val1 = 5;
-                    }*/
+                        val1 = 4;
+                    }
                     if (SumOfArray(this.gridA.dynamicLinkStart < val1)) {
                         potentialVal2 = 1;
                     } else {
@@ -211,6 +211,7 @@ class GridAnalyzer {
                 }
             }
         }
+        /*
         let max = 0;
         for (i = 0; i < 3; i++) {
             for (k = 0; k < 9; k++) {
@@ -218,7 +219,7 @@ class GridAnalyzer {
                     max = this.gridA.outputGrid[i][k];
                 }
             }
-        }
+        }*/
         console.log("--------------------");
         console.log(this.gridA.outputGrid);
         return this.gridA.outputGrid;
