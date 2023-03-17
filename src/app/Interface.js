@@ -1,8 +1,30 @@
+//setup analyzer
+//test arrs
+var TestGrid = [true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false ];
+var TestGrid2 = [true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true ];
+var TestGrid3 = [false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false ];
+
+var GridSampleA = new Grid(TestGrid);
+var GridSampleB = new Grid(TestGrid2);
+var GridSampleC = new Grid(TestGrid3);
+
+var testAnalyzer = new GridAnalyzer(GridSampleA, 0.5, 0.75, 1, 0.25, 1);
+var testAnalyzerB = new GridAnalyzer(GridSampleB, 0.5, 0.75, 1, 0.25, 1);
+var testAnalyzerC = new GridAnalyzer(GridSampleC, 0.5, 0.75, 1, 0.25, 1);
+
+//console.log(analyzer.gridA);
+//analyzer.AnalyzeGrid();
+
 //get T/F values from current grid.
 function GetBooleanValues(){
+    var arr = [];
+    for(var i = 1; i < 4; i++)
+    for(var k = 1; k < 10; k++){
+        arr.push($("#box"+conv(i)+k).css("background-color") !== RED);
+    }
+    return arr;
 }
-var TestGrid = [true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, ];
-var analyzer = new GridAnalyzer(TestGrid);
+
 function GStoHex(gs){
     if(gs < 1){
         return "#ffffff";
@@ -24,9 +46,10 @@ function conv(num){
     }
 }
 function RenderNewGrid(a) {
+    var cc = a[0].concat (a[1], a[2]);
     for(var i = 1; i < 4; i++)
     for(var k = 1; k < 10; k++){
-        $(`#nextGrid${conv(i) + k}`).css("background-color", GStoHex(a[i*k]));
+        $(`#nextGrid${conv(i) + k}`).css("background-color", GStoHex(cc[i*k]));
     }
 }
 
@@ -44,7 +67,7 @@ function gridClickHandlerHybrid(a){
         box.css("background-color", RED);
         box.addClass("gridboxRed");
     }
-    analyzer.AnalyzeGrid();
+    RenderNewGrid(new GridAnalyzer(new Grid(GetBooleanValues()), 0.5, 0.75, 1, 0.25, 1).AnalyzeGrid());
 }
 function gridClickHandler(a){
     var box = $("#"+a);
@@ -60,7 +83,7 @@ function gridClickHandler(a){
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
     }
-    analyzer.AnalyzeGrid();
+    RenderNewGrid(new GridAnalyzer(new Grid(GetBooleanValues()), 0.5, 0.75, 1, 0.25, 1).AnalyzeGrid());
 }
 
 function printNextSpot(){
