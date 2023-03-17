@@ -5,35 +5,27 @@ class Grid {
         const MID_INDEX = 1;
         const BOT_INDEX = 2;
         this.grid = newArray(3, 9);
-        console.log("Grid:" + this.grid);
 
         this.outputGrid = newArray(3, 9);
-        console.log(this.outputGrid);
 
         this.pointPotential = newArray(3, 9);
-        console.log(this.pointPotential);
 
         this.difficulty = [
             [7, 7, 8, 9, 10, 9, 8, 7, 7],
             [4, 4, 5, 6, 7, 6, 5, 4, 4],
             [1, 1, 2, 3, 4, 3, 2, 1, 1]
         ];
-        console.log(this.difficulty);
 
         this.dynamicLinkLoc = newArray(3, 9);
-        console.log(this.dynamicLinkLoc);
 
         this.dynamicCooperationBonus = newArray(3, 9);
-        console.log(this.dynamicCooperationBonus);
 
         this.dynamicLocScore = newArray(3, 9);
-        console.log(this.dynamicLocScore);
+
 
         this.dynamicLinkStart = newArray(3, 9);
-        console.log(this.dynamicLinkStart);
 
         this.nextSpotPotential = newArray(3, 9);
-        console.log(this.nextSpotPotential);
 
         this.cooperationBonus = false;
     }
@@ -74,7 +66,6 @@ class Grid {
                 this.dynamicLinkStart[i][k] = 0;
             }
         }
-        console.log("Configured Grid");
     }
 }
 
@@ -97,19 +88,14 @@ class GridAnalyzer {
     }
     AnalyzeGrid() {
         this.gridA.ConfigureGrid();
-        console.log("ANALYZING GRID...");
         let l2 = true,
             l1 = true,
             r1 = true,
             r2 = true;
         var DynamicCooperationLinks = 0;
 
-        console.log("Looping...");
-        console.log("GRIDA: " + this.gridA.grid);
         for (i = 0; i < 3; i++) {
-            console.log("i: "+i);
             for (k = 0; k < 9; k++) {
-                console.log("i ==> k: "+k);
                 switch (k) {
                     case 1:
                         l2 = false;
@@ -189,15 +175,29 @@ class GridAnalyzer {
                 }
             }
         }
+        else {
+            for (i = 0; i < 3; i++) {
+                for (k = 3; k < 6; k++) {
+                    if (this.gridA.grid[i][k] == false) {
+                        this.gridA.dynamicCooperationBonus[i][k] = 0;
+                    }
+                }
+            }
+        }                    
+        console.log("Point Potentials" + this.gridA.pointPotential);
+        console.log("Dynamic Loc Score" + this.gridA.dynamicLocScore);
+        console.log("Dynamic Cooperation Bonus" + this.gridA.dynamicCooperationBonus);
+        console.log("Dynamic Link Loc" + this.gridA.dynamicLinkLoc);
+        console.log("Point potential weight: " + this.ppw + ", Difficulty weight: " + this.dw + ", Location weight: " + this.lw + ", Cooperation bonus weight: " + this.cw + ", Link Location Weight: " + this.llw);
         for (i = 0; i < 3; i++) {
             for (k = 0; k < 9; k++) {
                 if (this.gridA.grid[i][k] == true) {
                     this.gridA.outputGrid[i][k] = 0;
                 } else {
-                    let potentialVal = this.ppw * this.gridA.pointPotential[i][k] + this.dw * this.gridA.difficulty[i][k] + this.lw * this.gridA.dynamicLocScore[i][k] + this.cw * this.gridA.dynamicCooperationBonus[i][k] + this.llw * this.gridA.dynamicLinkLoc[i][k];
+                    let potentialVal = this.ppw * this.gridA.pointPotential[i][k] + this.dw/this.gridA.difficulty[i][k] + this.lw * this.gridA.dynamicLocScore[i][k] + this.cw * this.gridA.dynamicCooperationBonus[i][k] + this.llw * this.gridA.dynamicLinkLoc[i][k];
                     let potentialVal2 = 0,
                         val1 = 0;
-                    if (this.gridA.dynamicCooperationBonus[i][k] == true && SumOfArray(this.gridA.DynamicCooperationLinks[i]) == 0) {
+                    if (this.gridA.dynamicCooperationBonus[i][k] == true && SumOfArray(this.gridA.dynamicCooperationBonus) == 0) {
                         val1 = 5;
                     } else {
                         val1 = 4;
