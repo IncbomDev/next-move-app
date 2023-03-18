@@ -9,6 +9,10 @@
   --bg-color: rgb(20, 20, 20);
   --header-color: rgb(40, 40, 40);
   --header-height: 10vh;
+  --header-border: 1px solid white;
+  --text-color: white;
+  --button-hover: rgb(60, 60, 60);
+  --button-selected: ;
 }
 @media screen and (max-width: 600px) {
   :root {
@@ -25,8 +29,8 @@
 }
 body {
   font-family: 'San Francisco', sans-serif;
-  background-color: black;
-  color: white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   margin: 0;
   padding: 0;
 }
@@ -36,14 +40,14 @@ body {
   background-color: var(--header-color);
   height: var(--header-height);
   padding: 0 20px;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  border-top: var(--header-border);
+  border-bottom: var(--header-border);
 }
 .button-container {
   display: flex;
   height: var(--header-height);
   padding-right: 20px;
-  border-left: 1px solid white;
+  border-left: var(--header-border);
 }
 .button {
   display: inline-flex;
@@ -51,7 +55,7 @@ body {
   justify-content: center;
   padding: 0;
   background-color: var(--header-color);
-  color: white;
+  color: var(--text-color);
   text-align: center;
   text-decoration: none;
   font-size: 16px;
@@ -59,11 +63,11 @@ body {
   width: 10vw;
   margin-right: -10px;
   cursor: pointer;
-  border-right: 1px solid white;
+  border-right: var(--header-border);
   transition: 0.3s ease-in-out;
 }
 .button:hover{
-  background-color: rgb(60, 60, 60);
+  background-color: var(--button-hover);
 }
 .button:not(:last-child) {
   margin-right: 0;
@@ -71,7 +75,7 @@ body {
 h1 {
   font-size: 1.5em;
   font-weight: 700;
-  color: white;
+  color: var(--text-color);
 }
 #title{
   font-size: 2vh;
@@ -88,13 +92,13 @@ body{
   margin: 0;
   padding: 0;
   background-color: var(--bg-color);
-  color: white;
+  color: var(--text-color);
   overflow-x: hidden;
   overflow-y: hidden;
 }
 #head{
   background-color: var(--header-color);
-  border-bottom: 1px solid rgb(88, 88, 88);
+  border-bottom: var(--header-border);
   height: var(--header-height);
   float: top;
 }
@@ -118,7 +122,7 @@ body{
 }
 .head-button button{
   background-color: rgb(37, 37, 37);
-  color: white;
+  color: var(--text-color);
   padding-top: 1.15vw;
   font-family: "JetBrains Mono", monospace;
   font-weight: 750;
@@ -150,7 +154,6 @@ body{
 #sideText{
   font-size: 1.5em;
   font-weight: 700;
-  color: white;
   text-align: center;
   float: right;
   margin-right: 20px;
@@ -158,11 +161,15 @@ body{
 #infoText{
   font-family: "Jaldi", sans-serif;
 }
+#label{
+  display: inline-block;
+}
 #checkbox{
   width: 2vw;
   height: 2vw;
   border-radius: 0.5vw;
-  background-color: white;
+  background-color: #ffffff;
+  display: inline-block;
 }
 #header-tabs-file{
   display: none;
@@ -171,5 +178,5 @@ body{
   display: none;
 }
 .selected{
-  background-color: gray;
+  background-color: var(--button-selected);
 }

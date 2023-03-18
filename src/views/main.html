@@ -34,16 +34,16 @@
         <div class="header-tabs">
           <div id="header-tabs-options">
             <div class="label">Other team scored coopertition bonus?</div>
-            <div id="checkbox" onclick="otherTeam()"></div>
+            <div id="checkbox" onclick="coopertitionBonus()"></div>
           </div>
           <div id="header-tabs-file">
-            <h3>Input File</h3>
-            <input type="file" id="IMPORT" />
-            <button id="EXPORT">Export File</button>
-            <button>Export Settings</button>
+            <h3>Input File (DEPRECATED)</h3>
           </div>
           <div id="header-tabs-more">
-            <button>Select Theme...</button>
+            <button onclick="theme('dark')">Dark</button>
+            <button onclick="theme('light')">Light</button>
+            <button onclick="theme('ocean')">Ocean</button>
+            <button onclick="theme('pink')">Pink</button>
           </div>
         </div>
       </header>
