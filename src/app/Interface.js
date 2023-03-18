@@ -76,22 +76,6 @@ function RenderNewGrid(grid) {
     }
 }
 
-function gridClickHandlerHybrid(a){
-    var box = $("#"+a);
-    if(box.css("background-color") == RED){
-        box.css("background-color", ORANGE);
-        box.addClass("gridboxOrange");
-        box.removeClass("gridboxRed");
-    }else if(box.css("background-color") == ORANGE){
-        box.css("background-color", PURPLE);
-        box.addClass("gridboxPurple");
-        box.removeClass("gridboxOrange");
-    }else if (box.css("background-color") == "rgb(235, 9, 212)"){
-        box.css("background-color", RED);
-        box.addClass("gridboxRed");
-    }
-    RenderNewGrid(new GridAnalyzer(new Grid(GetBooleanValues()), 0.5, 0.75, 1, 0.25, 1).AnalyzeGrid());
-}
 function gridClickHandler(a){
     var box = $("#"+a);
     var val;
