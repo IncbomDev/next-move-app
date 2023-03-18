@@ -28,15 +28,9 @@ class Grid {
         for (i = 0; i < 3; i++) {
             for (k = 0; k < 9; k++) {
                 this.grid[i][k] = false;
-                this.outputGrid[i][k] = 0;
-                this.pointPotential[i][k] = 0;
-                this.dynamicLinkLoc[i][k] = 0;
-                this.dynamicCooperationBonus[i][k] = 0;
-                this.dynamicLocScore[i][k] = 0;
-                this.dynamicLinkStart[i][k] = 0;
-                this.nextSpotPotential[i][k] = 0;
             }
         }
+        this.ConfigureGrid();
     }
 
     setNode(i, k, val) {
@@ -84,13 +78,13 @@ class GridAnalyzer {
         this.cw = CooperationWeight;
         this.llw = LinkLocationWeight;
         this.gridA = gridA;
+        this.bestPtVal = 0;
     }
 
     UpdateGrid(grid) {
         this.gridA = grid;
     }
     AnalyzeGrid() {
-        this.gridA.ConfigureGrid();
         let l2 = true,
             l1 = true,
             r1 = true,
@@ -143,27 +137,36 @@ class GridAnalyzer {
                     this.gridA.dynamicLinkStart[i][k] = 0;
                 }
             }
-
-            if (Boolean2Int(this.gridA.grid[i][0]) + Boolean2Int(this.gridA.grid[i][1]) + Boolean2Int(this.gridA.grid[i][2]) == 2) {
-                for (l = 0; l < l + 3; l++) {
-                    if (this.gridA.grid[i][k] == false) {
-                        this.gridA.dynamicLinkLoc[i][k];
-                    }
-                }
-            } else if (Boolean2Int(this.gridA.grid[i][3]) + Boolean2Int(this.gridA.grid[i][4]) + Boolean2Int(this.gridA.grid[i][5]) == 2) {
-                for (l = 0; l < l + 3; l++) {
-                    if (this.gridA.grid[i][k] == false) {
-                        this.gridA.dynamicLinkLoc[i][k];
-                    }
-                }
-            } else if (Boolean2Int(this.gridA.grid[i][6]) + Boolean2Int(this.gridA.grid[i][7]) + Boolean2Int(this.gridA.grid[i][8]) == 2) {
-                for (l = 0; l < l + 3; l++) {
-                    if (this.gridA.grid[i][k] == false) {
-                        this.gridA.dynamicLinkLoc[i][k];
+            for (var z = 0; z < 7; z++) { 
+                if (Boolean2Int(this.gridA.grid[i][z]) + Boolean2Int(this.gridA.grid[i][z+1]) + Boolean2Int(this.gridA.grid[i][z+2]) == 2) {
+                    for (l=z; l<z+3; l++) {
+                        if (this.gridA.grid[i][l] == false) {
+                            this.gridA.dynamicLinkLoc[i][l] = 1;
+                        }
                     }
                 }
             }
-            for (l = 3; l <= 5; l++) {
+            /*
+            if (Boolean2Int(this.gridA.grid[i][0]) + Boolean2Int(this.gridA.grid[i][1]) + Boolean2Int(this.gridA.grid[i][2]) == 2) {
+                for (l = 0; l < 3; l++) {
+                    if (this.gridA.grid[i][l] == false) {
+                        this.gridA.dynamicLinkLoc[i][l] = 1;
+                    }
+                }
+            } else if (Boolean2Int(this.gridA.grid[i][3]) + Boolean2Int(this.gridA.grid[i][4]) + Boolean2Int(this.gridA.grid[i][5]) == 2) {
+                for (l = 3; l < 6; l++) {
+                    if (this.gridA.grid[i][l] == false) {
+                        this.gridA.dynamicLinkLoc[i][l] = 1;
+                    }
+                }
+            } else if (Boolean2Int(this.gridA.grid[i][6]) + Boolean2Int(this.gridA.grid[i][7]) + Boolean2Int(this.gridA.grid[i][8]) == 2) {
+                for (l = 6; l < 9; l++) {
+                    if (this.gridA.grid[i][l] == false) {
+                        this.gridA.dynamicLinkLoc[i][l] = 1;
+                    }
+                }
+            }*/
+            for (l = 3; l < 6; l++) {
                 if (this.gridA.grid[i][l] == true) {
                     DynamicCooperationLinks++;
                 }
@@ -172,25 +175,22 @@ class GridAnalyzer {
         if (DynamicCooperationLinks < 3) {
             for (i = 0; i < 3; i++) {
                 for (k = 3; k < 6; k++) {
-                    if (this.gridA.grid[i][k] == false) {
-                        this.gridA.dynamicCooperationBonus[i][k] = 1;
-                    }
+                    this.gridA.dynamicCooperationBonus[i][k] = 1;
                 }
             }
         }
         else {
             for (i = 0; i < 3; i++) {
                 for (k = 3; k < 6; k++) {
-                    if (this.gridA.grid[i][k] == false) {
-                        this.gridA.dynamicCooperationBonus[i][k] = 0;
-                    }
+                    this.gridA.dynamicCooperationBonus[i][k] = 0;
                 }
             }
         }                    
         console.log("Point Potentials" + this.gridA.pointPotential);
+        console.log("Difficult Score" + this.gridA.difficulty);
         console.log("Dynamic Loc Score" + this.gridA.dynamicLocScore);
-        console.log("Dynamic Cooperation Bonus" + this.gridA.dynamicCooperationBonus);
         console.log("Dynamic Link Loc" + this.gridA.dynamicLinkLoc);
+        console.log("Dynamic Cooperation Bonus" + this.gridA.dynamicCooperationBonus);
         console.log("Point potential weight: " + this.ppw + ", Difficulty weight: " + this.dw + ", Location weight: " + this.lw + ", Cooperation bonus weight: " + this.cw + ", Link Location Weight: " + this.llw);
         console.log("Inputted grid: " + this.gridA.grid);
         for (i = 0; i < 3; i++) {
@@ -215,7 +215,7 @@ class GridAnalyzer {
                 }
             }
         }
-        /*
+        
         let max = 0;
         for (i = 0; i < 3; i++) {
             for (k = 0; k < 9; k++) {
@@ -223,10 +223,10 @@ class GridAnalyzer {
                     max = this.gridA.outputGrid[i][k];
                 }
             }
-        }*/
+        }
         console.log("--------------------");
         console.log(this.gridA.outputGrid);
-        return this.gridA.outputGrid;
+        this.bestPtVal = max;
     }
 }
 

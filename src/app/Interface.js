@@ -36,6 +36,9 @@ function GetBooleanValues(){
 }
 
 function GStoHex(gs){
+    if (gs == GA.bestPtVal) {
+        return " #0098ff";
+    }
     if(gs < 1){
         return "#ffffff";
     }else if(1 < gs && gs < 1.75){
@@ -91,22 +94,29 @@ function gridClickHandlerHybrid(a){
 }
 function gridClickHandler(a){
     var box = $("#"+a);
+    var val;
     if(box.css("background-color") == GREEN){
         box.css("background-color", RED);
         box.addClass("gridboxRed");
         box.removeClass("gridboxGreen");
-        GRID.setNode(reverseconv(a[3])-1, a[4]-1, false);
+        val = false;
         
     }else if(box.css("background-color") == RED){
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
-        GRID.setNode(reverseconv(a[3])-1, a[4]-1, true);
+        val = true;
     }else{
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
-        GRID.setNode(reverseconv(a[3])-1, a[4]-1, true);
+        val = true;
     }
-    GA.UpdateGrid(GRID);
+    var newGrid = new Grid();
+    newGrid.grid = GRID.grid;
+    GRID = newGrid;
+    var newgrid = GRID.grid;
+    newgrid[reverseconv(a[3]) - 1][parseInt(a[4]) - 1] = val;
+    GRID.grid = newgrid;
+    GA.gridA = GRID;
     GA.AnalyzeGrid();
     RenderNewGrid(GRID.outputGrid);
 }
@@ -142,4 +152,9 @@ function tab(t){
         $("#fileTab").removeClass("selected");
         $("#moreTab").addClass("selected");
     }
+}
+
+window.onload = function(){ 
+    GA.AnalyzeGrid();
+    RenderNewGrid(GA.gridA.outputGrid);
 }
