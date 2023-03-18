@@ -20,6 +20,7 @@ var testAnalyzerC = new GridAnalyzer(GridSampleC, 0.5, 0.75, 1, 0.25, 1);
 var GRID = new Grid();
 var GA = new GridAnalyzer(new Grid(), 0.5, 0.75, 1, 0.25, 1);
 //get T/F values from current grid.
+
 function GetBooleanValues(){
     var arr = [];
     for(var i = 1; i < 4; i++)
@@ -102,11 +103,12 @@ function gridClickHandler(a){
         box.addClass("gridboxRed");
         box.removeClass("gridboxGreen");
         val = false;
-        
+        DeletePreviousEvent();
     }else if(box.css("background-color") == RED){
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
         val = true;
+        LogEvent("Piece scored");
     }else{
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
@@ -133,26 +135,42 @@ function tab(t){
         $("#header-tabs-options").css("display", "block");
         $("#header-tabs-file").css("display", "none");
         $("#header-tabs-more").css("display", "none");
+        $("#header-tabs-simulate").css("display", "none");
 
         $("#optionsTab").addClass("selected");
         $("#gridTab").removeClass("selected");
         $("#moreTab").removeClass("selected");
+        $("#simulateTab").removeClass("selected");
     }else if(t == "file"){
         $("#header-tabs-options").css("display", "none");
         $("#header-tabs-file").css("display", "block");
         $("#header-tabs-more").css("display", "none");
+        $("#header-tabs-simulate").css("display", "none");
 
         $("#optionsTab").removeClass("selected");
         $("#fileTab").addClass("selected");
         $("#moreTab").removeClass("selected");
+        $("#simulateTab").removeClass("selected");
     }else if(t == "more"){
         $("#header-tabs-options").css("display", "none");
         $("#header-tabs-file").css("display", "none");
         $("#header-tabs-more").css("display", "block");
+        $("#header-tabs-simulate").css("display", "none");
 
         $("#optionsTab").removeClass("selected");
         $("#fileTab").removeClass("selected");
         $("#moreTab").addClass("selected");
+        $("#simulateTab").removeClass("selected");
+    }else if(t == "simulate"){
+        $("#header-tabs-options").css("display", "none");
+        $("#header-tabs-file").css("display", "none");
+        $("#header-tabs-more").css("display", "none");
+        $("#header-tabs-simulate").css("display", "block");
+
+        $("#optionsTab").removeClass("selected");
+        $("#fileTab").removeClass("selected");
+        $("#moreTab").removeClass("selected");
+        $("#simulateTab").addClass("selected");
     }
 }
 

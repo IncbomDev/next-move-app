@@ -7,3 +7,5 @@ setTimeout(function(){
     document.body.style.overflowY = 'scroll';
   },1000);
 }, 2000);
+
+console.clear();
