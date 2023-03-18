@@ -39,15 +39,18 @@ function GStoHex(gs){
     if (gs == GA.bestPtVal) {
         return " #0098ff";
     }
+    if (gs == 0) {
+        return "#FF0000";
+    }
     if(gs < 1){
         return "#ff8166";
-    }else if(1 < gs && gs < 1.75){
+    }else if(1 <= gs && gs < 1.75){
         return "#b6f2c1";
-    }else if(1.75 < gs && gs < 2.25){
+    }else if(1.75 <= gs && gs < 2.25){
         return "#74eb6e";
-    }else if(2.25 < gs && gs < 2.75){
+    }else if(2.25 <= gs && gs < 2.75){
         return "#56EE4E";
-    }else if(2.75 < gs){
+    }else if(2.75 <= gs){
         return "#37f02e";
     }
 }
@@ -83,6 +86,10 @@ function coopertitionBonus(){
 function RenderNewGrid(grid) {
     for(var i = 1; i < 4; i++)
     for(var k = 1; k < 10; k++){
+        if (i == 3 && k == 1) {
+            console.log("Broken:" + GStoHex(grid[i-1][k-1]))
+            console.log("Broken val: " + grid[i-1][k-1]);
+        }
         $(`#nextGrid${conv(i) + k}`).css("background-color", GStoHex(grid[i-1][k-1]));
     }
 }
@@ -109,7 +116,7 @@ function gridClickHandler(a){
     newGrid.grid = GRID.grid;
     GRID = newGrid;
     var newgrid = GRID.grid;
-    newgrid[reverseconv(a[3]) - 1][parseInt(a[4]) - 1] = val;
+    newgrid[reverseconv(a[3]) - 1][parseInt(a[4]) - 1] = val; 
     GRID.grid = newgrid;
     GA.gridA = GRID;
     GA.AnalyzeGrid();
