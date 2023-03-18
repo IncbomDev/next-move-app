@@ -40,7 +40,7 @@ function GStoHex(gs){
         return " #0098ff";
     }
     if(gs < 1){
-        return "#ffffff";
+        return "#ff8166";
     }else if(1 < gs && gs < 1.75){
         return "#b6f2c1";
     }else if(1.75 < gs && gs < 2.25){
@@ -69,6 +69,17 @@ function reverseconv(letter) {
         return 3;
     }
 }
+
+function coopertitionBonus(){
+    if($("#checkbox").css("background-color") == "rgb(255, 255, 255)"){
+        $("#checkbox").css("background-color", "rgb(255, 204, 0)");
+        GRID.cooperationBonus = true;
+    } else {
+        $("#checkbox").css("background-color", "rgb(255, 255, 255)");
+        GRID.cooperationBonus = false;
+    }
+}
+
 function RenderNewGrid(grid) {
     for(var i = 1; i < 4; i++)
     for(var k = 1; k < 10; k++){
@@ -141,4 +152,36 @@ function tab(t){
 window.onload = function(){ 
     GA.AnalyzeGrid();
     RenderNewGrid(GA.gridA.outputGrid);
+}
+
+function theme(t){
+    if(t == "light"){
+        document.documentElement.style.setProperty("--header-color", "rgb(244, 244, 244)");
+        document.documentElement.style.setProperty("--header-border", "1px solid rgb(200, 200, 200)");
+        document.documentElement.style.setProperty("--text-color", "black");
+        document.documentElement.style.setProperty("--bg-color", "white");
+        document.documentElement.style.setProperty("--button-hover", "rgb(230, 230, 230)");
+        document.documentElement.style.setProperty("--button-selected", "rgb(220, 220, 220)");
+    }else if(t == "dark"){
+        document.documentElement.style.setProperty("--header-color", "rgb(40, 40, 40)");
+        document.documentElement.style.setProperty("--header-border", "1px solid white");
+        document.documentElement.style.setProperty("--text-color", "white");
+        document.documentElement.style.setProperty("--bg-color", "rgb(20, 20, 20)");
+        document.documentElement.style.setProperty("--button-hover", "rgb(60, 60, 60)");
+        document.documentElement.style.setProperty("--button-selected", "gray");
+    }else if(t == "ocean"){
+        document.documentElement.style.setProperty("--header-color", "#11d1b1");
+        document.documentElement.style.setProperty("--header-border", "1px solid white");
+        document.documentElement.style.setProperty("--text-color", "white");
+        document.documentElement.style.setProperty("--bg-color", "#129983");
+        document.documentElement.style.setProperty("--button-hover", "#16b89d");
+        document.documentElement.style.setProperty("--button-selected", "#13f0cb");
+    }else if(t == "pink"){
+        document.documentElement.style.setProperty("--header-color", "#ffd1f9");
+        document.documentElement.style.setProperty("--header-border", "1px solid white");
+        document.documentElement.style.setProperty("--text-color", "black");
+        document.documentElement.style.setProperty("--bg-color", "white");
+        document.documentElement.style.setProperty("--button-hover", "#ffabf4");
+        document.documentElement.style.setProperty("--button-selected", "#ff7aed");
+    }
 }
