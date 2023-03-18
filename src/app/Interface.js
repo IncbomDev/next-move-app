@@ -1,5 +1,7 @@
 //setup analyzer
 //test arrs
+
+/*
 var TestGrid = [true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false ];
 var TestGrid2 = [true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true, true, false, true ];
 var TestGrid3 = [false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false, false, true, false ];
@@ -14,25 +16,35 @@ var testAnalyzerC = new GridAnalyzer(GridSampleC, 0.5, 0.75, 1, 0.25, 1);
 
 //console.log(analyzer.gridA);
 //analyzer.AnalyzeGrid();
-
+*/
+var GRID = new Grid();
+var GA = new GridAnalyzer(new Grid(), 0.5, 0.75, 1, 0.25, 1);
 //get T/F values from current grid.
 function GetBooleanValues(){
     var arr = [];
     for(var i = 1; i < 4; i++)
     for(var k = 1; k < 10; k++){
-        arr.push($("#box"+conv(i)+k).css("background-color") !== RED);
+        if ($("#box"+conv(i)+k).css("background-color") == RED) {
+            arr.push(false);
+        }
+        else {
+            arr.push(true);
+        }
     }
+    console.log("Obtained grid" + arr);
     return arr;
 }
 
 function GStoHex(gs){
     if(gs < 1){
         return "#ffffff";
-    }else if(1 < gs && gs < 2){
+    }else if(1 < gs && gs < 1.75){
         return "#b6f2c1";
-    }else if(2 < gs && gs < 2.5){
+    }else if(1.75 < gs && gs < 2.25){
         return "#74eb6e";
-    }else if(2.5 < gs){
+    }else if(2.25 < gs && gs < 2.75){
+        return "#56EE4E";
+    }else if(2.75 < gs){
         return "#37f02e";
     }
 }
@@ -45,11 +57,19 @@ function conv(num){
         return 'C';
     }
 }
-function RenderNewGrid(a) {
-    var cc = a[0].concat (a[1], a[2]);
+function reverseconv(letter) {
+    if (letter == 'A') {
+        return 1;
+    } else if (letter == 'B') {
+        return 2;
+    } else {
+        return 3;
+    }
+}
+function RenderNewGrid(grid) {
     for(var i = 1; i < 4; i++)
     for(var k = 1; k < 10; k++){
-        $(`#nextGrid${conv(i) + k}`).css("background-color", GStoHex(cc[i*k]));
+        $(`#nextGrid${conv(i) + k}`).css("background-color", GStoHex(grid[i-1][k-1]));
     }
 }
 
@@ -75,15 +95,20 @@ function gridClickHandler(a){
         box.css("background-color", RED);
         box.addClass("gridboxRed");
         box.removeClass("gridboxGreen");
+        GRID.setNode(reverseconv(a[3])-1, a[4]-1, false);
         
     }else if(box.css("background-color") == RED){
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
+        GRID.setNode(reverseconv(a[3])-1, a[4]-1, true);
     }else{
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
+        GRID.setNode(reverseconv(a[3])-1, a[4]-1, true);
     }
-    RenderNewGrid(new GridAnalyzer(new Grid(GetBooleanValues()), 0.5, 0.75, 1, 0.25, 1).AnalyzeGrid());
+    GA.UpdateGrid(GRID);
+    GA.AnalyzeGrid();
+    RenderNewGrid(GRID.outputGrid);
 }
 
 function printNextSpot(){

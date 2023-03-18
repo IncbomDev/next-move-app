@@ -1,9 +1,6 @@
 let i, j, k, l;
 class Grid {
     constructor() {
-        const TOP_INDEX = 0;
-        const MID_INDEX = 1;
-        const BOT_INDEX = 2;
         this.grid = newArray(3, 9);
 
         this.outputGrid = newArray(3, 9);
@@ -28,20 +25,22 @@ class Grid {
         this.nextSpotPotential = newArray(3, 9);
 
         this.cooperationBonus = false;
+        for (i = 0; i < 3; i++) {
+            for (k = 0; k < 9; k++) {
+                this.grid[i][k] = false;
+                this.outputGrid[i][k] = 0;
+                this.pointPotential[i][k] = 0;
+                this.dynamicLinkLoc[i][k] = 0;
+                this.dynamicCooperationBonus[i][k] = 0;
+                this.dynamicLocScore[i][k] = 0;
+                this.dynamicLinkStart[i][k] = 0;
+                this.nextSpotPotential[i][k] = 0;
+            }
+        }
     }
 
     setNode(i, k, val) {
-        switch (i) {
-            case TOP_INDEX:
-                grid[TOP_INDEX][k] = val;
-                break;
-            case MID_INDEX:
-                grid[MID_INDEX][k] = val;
-                break;
-            case BOT_INDEX:
-                grid[BOT_INDEX][k] = val;
-                break;
-        }
+        this.grid[i][k] = val;
     }
 
     ConfigureGrid() {
@@ -85,6 +84,10 @@ class GridAnalyzer {
         this.cw = CooperationWeight;
         this.llw = LinkLocationWeight;
         this.gridA = gridA;
+    }
+
+    UpdateGrid(grid) {
+        this.gridA = grid;
     }
     AnalyzeGrid() {
         this.gridA.ConfigureGrid();
@@ -189,6 +192,7 @@ class GridAnalyzer {
         console.log("Dynamic Cooperation Bonus" + this.gridA.dynamicCooperationBonus);
         console.log("Dynamic Link Loc" + this.gridA.dynamicLinkLoc);
         console.log("Point potential weight: " + this.ppw + ", Difficulty weight: " + this.dw + ", Location weight: " + this.lw + ", Cooperation bonus weight: " + this.cw + ", Link Location Weight: " + this.llw);
+        console.log("Inputted grid: " + this.gridA.grid);
         for (i = 0; i < 3; i++) {
             for (k = 0; k < 9; k++) {
                 if (this.gridA.grid[i][k] == true) {
