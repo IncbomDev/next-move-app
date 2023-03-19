@@ -2,15 +2,21 @@ var timer = 0;
 var on = false;
 var phase = "auto";
 var recording = false;
+var TempLog;
 
 function LogEvent(e){
     if(on){
         document.getElementById("liveEvents-inner").innerHTML += `<p class="eventlog"><span class='event-timestamp'><strong>${Timestamp()}
         </strong></span>${e}</p>`
+        TempLog += `[T]${Timestamp()}[E]${e}[A]`;
     }
 }
 function DeletePreviousEvent(){
-    document.getElementById("liveEvents-inner").removeChild(document.getElementById("liveEvents-inner").lastChild);
+    try{
+        document.getElementById("liveEvents-inner").removeChild(document.getElementById("liveEvents-inner").lastChild);
+    }catch(e){
+        console.log("No previous event to delete");
+    }
 }
 function start(){
     on = true;
@@ -22,6 +28,10 @@ function stop(){
 function stopreset(){
     on = false;
     timer = 0;
+    $("#gui")[0].classList.add("alert");
+    setTimeout(() => {
+        $("#gui")[0].classList.remove("alert");
+    }, 3000);
 }
 function EvalSeconds(sec){
     if(sec < 10){

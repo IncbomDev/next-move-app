@@ -32,7 +32,7 @@ function GetBooleanValues(){
             arr.push(true);
         }
     }
-    console.log("Obtained grid" + arr);
+    console.log("Obtained grid: " + arr);
     return arr;
 }
 
@@ -98,6 +98,16 @@ function RenderNewGrid(grid) {
 function gridClickHandler(a){
     var box = $("#"+a);
     var val;
+    var newGrid = new Grid();
+    newGrid.grid = GRID.grid;
+    GRID = newGrid;
+    var newgrid = GRID.grid;
+    newgrid[reverseconv(a[3]) - 1][parseInt(a[4]) - 1] = val; 
+    GRID.grid = newgrid;
+    GA.gridA = GRID;
+    GA.AnalyzeGrid();
+    RenderNewGrid(GRID.outputGrid);
+
     if(box.css("background-color") == GREEN){
         box.css("background-color", RED);
         box.addClass("gridboxRed");
@@ -108,21 +118,13 @@ function gridClickHandler(a){
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
         val = true;
+        
         LogEvent("Piece scored");
     }else{
         box.css("background-color", GREEN);
         box.addClass("gridboxGreen");
         val = true;
     }
-    var newGrid = new Grid();
-    newGrid.grid = GRID.grid;
-    GRID = newGrid;
-    var newgrid = GRID.grid;
-    newgrid[reverseconv(a[3]) - 1][parseInt(a[4]) - 1] = val; 
-    GRID.grid = newgrid;
-    GA.gridA = GRID;
-    GA.AnalyzeGrid();
-    RenderNewGrid(GRID.outputGrid);
 }
 
 function printNextSpot(){

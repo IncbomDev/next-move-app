@@ -31,6 +31,9 @@
         <img src="../assets/preloader.jpg" alt="loading" />
     </div>
     <div id="main">
+      <div id="gui">
+        <h4>Recording saved.</h4>
+      </div>
       <header class="header">
         <div id="title">Next Move App</div>
         <div class="button-container">
@@ -47,7 +50,6 @@
               <option>Top</option>
               <option>Front</option>
               <option>Left</option>
-              <option>Isometric (???)</option>
             </select>
           </div>
           <div id="header-tabs-file">
@@ -72,10 +74,12 @@
             <button onclick="theme('pink')" class="button-theme pinktheme">Pink</button>
           </div>
           <div id="header-tabs-simulate">
-            <button id="#start" onclick="start()">Start</button>
-            <button id="#stop" onclick="stopreset()">Stop and Reset</button>
-            <h3 id="timer">0:00</h3>
-            <p id="phase">AUTONOMOUS</p>
+            <button id="start" onclick="start()"><img src="../assets/start.png"></button>
+            <div id="timer-container">
+              <h3 id="timer">0:00</h3>
+              <p id="phase">AUTONOMOUS</p>
+            </div>
+            <button id="stop" onclick="stopreset()"><img src="../assets/stop.png"></button>
           </div>
         </div>
         <div class="key">

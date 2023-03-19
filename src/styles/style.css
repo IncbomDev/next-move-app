@@ -27,6 +27,17 @@
     opacity: 0;
   }
 }
+@keyframes alertFadeOut{
+  0%{
+    opacity: 1;
+  }
+  66%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
 body {
   font-family: 'San Francisco', sans-serif;
   background-color: var(--bg-color);
@@ -215,7 +226,48 @@ body{
   width: 15vw;
   height: 90vh;
   border: var(--header-border);
+  text-align: center;
 }
-#live-events-title{
-  margin-left: 3vw;
+#start{
+  display: inline-flex;
+  width: 2vw;
+  height: 2vw;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
+#stop{
+  display: inline-flex;
+  width: 2vw;
+  height: 2vw;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
+button img{
+  width: 2vw;
+  height: 2vw;
+}
+#timer-container{
+  display: inline-block;
+  text-align: center;
+}
+#timer{
+  width: 100%;
+}
+#gui{
+  position: absolute;
+  width: 10vw;
+  height: 5vh;
+  top: 2%;
+  left: 1.5%;
+  background-color: rgb(55, 212, 55);
+  border-radius: 5px;
+  text-align: center;
+  opacity: 0;
+}
+.alert{
+  animation: alertFadeOut 3s;
 }
