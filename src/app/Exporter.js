@@ -1,19 +1,28 @@
-class Exporter{
-    export(){
-        document.getElementById("export");
-    }
-
-    import() {
-        var fileInput = document.getElementById("IMPORT");
-        fileInput.addEventListener('change', (event) => {
-            var file = event.target.files[0];
-            var reader = new FileReader();
-            reader.onload = function(event) {
-                var contents = event.target.result;
-                console.log("File contents: " + contents);
-                return("File contents: " + contents);
-            };
-        });
-    }
+var scoreEvents = [];
+var data;
+function Score(pos, location){
+    this.position = pos;
+    this.location = location;
 }
+
+var input = document.getElementById("file-input");
+input.addEventListener("change", () => {
+    var reader = new FileReader();
+    reader.onload = function(){
+        console.log(reader.result);
+        data = JSON.parse(reader.result);
+        console.log(data);
+        console.log(data.events);
+        
+        for(var i = 0; i < data.events.length; i++){
+            if(data.events[i].eventType == "pieceScore"){
+                scoreEvents.push(new Score(data.events[i].gridPosition, data.events[i].time));
+            }
+        }
+
+        console.log(scoreEvents);
+    }
+    reader.readAsText(input.files[0]);
+});
+
 
