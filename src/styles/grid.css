@@ -19,6 +19,10 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.cone{
+    border-radius: 1.5vw;
+}
+
 .nextGridBox{
     width: 3vw;
     height: 3vw;
@@ -27,7 +31,7 @@
     display: inline-block;
     margin-left: 0.5vw;
     margin-top: 0.5vw;
-    transition: 0.3s;
+    transition: 0.3s;   
     font-family: 'JetBrains Mono', monospace;
     border: none;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -75,4 +79,9 @@
     height: 42px;
     text-align: center;
     
+}
+
+.key-item-color cone {
+    background-color: rgb(255, 0, 0);
+    border-radius: 1.5vw;
 }

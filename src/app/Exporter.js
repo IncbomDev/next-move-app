@@ -24,5 +24,3 @@ input.addEventListener("change", () => {
     }
     reader.readAsText(input.files[0]);
 });
-
-

@@ -15,6 +15,13 @@
     <script src="../app/index.js"></script>
     <script src="../app/Interface.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../app/Simulate.js"></script>
+    <script src="../app/key.js"></script>
+    <script type="module" src="../app/Graphs.js"></script>
+    <script type="importmap">
+    
+    </script>
     <title>Next Move App</title>
     <link rel="icon" href="../assets/favicon.ico">
   </head>
@@ -23,17 +30,26 @@
         <img src="../assets/preloader.jpg" alt="loading" />
     </div>
     <div id="main">
+      <div id="gui">
+        <h4>Recording saved.</h4>
+      </div>
       <header class="header">
         <div id="title">Next Move App</div>
         <div class="button-container">
           <a href="#" onclick="tab('options')" class="button" id="optionsTab">Options</a>
           <a href="#" onclick="tab('file')" class="button" id="fileTab">File</a>
           <a href="#" onclick="tab('more')" class="button" id="moreTab">More</a>
+          <a href="#" onclick="tab('simulate')" class="button" id="simulateTab">Simulate</a>
         </div>
         <div class="header-tabs">
           <div id="header-tabs-options">
             <div class="label">Other team scored coopertition bonus?</div>
             <div id="checkbox" onclick="coopertitionBonus()"></div>
+            <select id="view-select">
+              <option>Top</option>
+              <option>Front</option>
+              <option>Left</option>
+            </select>
           </div>
 
           <div id="header-tabs-file">
@@ -42,49 +58,69 @@
           </div>
 
           <div id="header-tabs-more">
-            <button onclick="theme('dark')">Dark</button>
-            <button onclick="theme('light')">Light</button>
-            <button onclick="theme('ocean')">Ocean</button>
-            <button onclick="theme('pink')">Pink</button>
+            <button onclick="theme('dark')" class="button-theme darktheme">Dark</button>
+            <button onclick="theme('light')" class="button-theme lighttheme">Light</button>
+            <button onclick="theme('ocean')" class="button-theme oceantheme">Ocean</button>
+            <button onclick="theme('pink')" class="button-theme pinktheme">Pink</button>
+          </div>
+          <div id="header-tabs-simulate">
+            <button id="start" onclick="start()"><img src="../assets/start.png"></button>
+            <div id="timer-container">
+              <h3 id="timer">0:00</h3>
+              <p id="phase">AUTONOMOUS</p>
+            </div>
+            <button id="stop" onclick="stopreset()"><img src="../assets/stop.png"></button>
           </div>
         </div>
+        <div class="key">
+          <div class="key-item">
+            <div class="key-item-color cone"></div>
+            <div class="key-item-text">Cone</divv>
+        </div>!
       </header>
+
+      <div id="liveEvents">
+        <h2 id="live-events-title">Live Events</h2>
+        <p id="recDisplay">Recording is OFF</p>
+        <div id="liveEvents-inner">
+        </div>
+      </div>
 
       <div id="grids">
         <div class="grid-container">
           <h1 class="grid-title">Current Grid</h1>
           <div id="gridlineA">
-            <button id="boxA1" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA2" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA3" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA4" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA5" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA6" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA7" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA8" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxA9" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxA1" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxA2" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxA3" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxA4" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxA5" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxA6" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxA7" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxA8" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxA9" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
           </div>
           <div id="gridlineB">
-            <button id="boxB1" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB2" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB3" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB4" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB5" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB6" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB7" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB8" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxB9" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxB1" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxB2" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxB3" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxB4" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxB5" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxB6" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxB7" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxB8" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxB9" class="gridbox cone" onclick="gridClickHandler(this.id)"></button>
           </div>
           <div id="gridlineC">
-            <button id="boxC1" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxC2" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxC3" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxC4" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxC5" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxC6" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxC7" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxC8" class="gridbox" onclick="gridClickHandler(this.id)"></button>
-            <button id="boxC9" class="gridbox" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC1" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC2" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC3" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC4" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC5" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC6" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC7" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC8" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
+            <button id="boxC9" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
           </div>
         </div>
 
@@ -126,8 +162,12 @@
           </div>
         </div>
       </div>
+
       </div>
     </div>
+    <div class="charts">
+      <canvas id="myChart"></canvas>
+    </div>    
   </body>
   <script src="../app/Exporter.js"></script>
 </html>
