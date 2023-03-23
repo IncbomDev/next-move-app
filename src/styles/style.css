@@ -14,6 +14,9 @@
   --button-hover: rgb(60, 60, 60);
   --button-selected: ;
 }
+.logo {
+  height: var(--header-height)
+}
 @media screen and (max-width: 600px) {
   :root {
     --header-height: 15vh;
@@ -38,6 +41,12 @@
     opacity: 0;
   }
 }
+
+#icon{
+  width: 4vw;
+  height: 4vw;
+}
+
 body {
   font-family: 'San Francisco', sans-serif;
   background-color: var(--bg-color);
@@ -187,6 +196,10 @@ body{
 }
 #header-tabs-more{
   display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow-y: scroll;
 }
 #header-tabs-simulate{
   display: none;
@@ -257,17 +270,28 @@ button img{
 #timer{
   width: 100%;
 }
+
 #gui{
   position: absolute;
+  display: flex;
   width: 10vw;
   height: 5vh;
   top: 2%;
   left: 1.5%;
   background-color: rgb(55, 212, 55);
   border-radius: 5px;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   opacity: 0;
 }
 .alert{
   animation: alertFadeOut 3s;
+}
+.button-theme{
+  width: 5vw;
+  height: 5vw;
+  border-radius: 0.25vw;
+  overflow: hidden;
+  display: inline;
 }

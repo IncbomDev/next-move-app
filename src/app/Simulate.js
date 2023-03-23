@@ -2,13 +2,20 @@ var timer = 0;
 var on = false;
 var phase = "auto";
 var recording = false;
-var TempLog;
+var TempLog = "";
+var saves = [];
 
+function Event(ts, ev){
+    this.ts = ts;
+    this.ev = ev;
+}
 function LogEvent(e){
     if(on){
         document.getElementById("liveEvents-inner").innerHTML += `<p class="eventlog"><span class='event-timestamp'><strong>${Timestamp()}
         </strong></span>${e}</p>`
-        TempLog += `[T]${Timestamp()}[E]${e}[A]`;
+        TempLog += `[T]${Timestamp()}[E]${e},`;
+        TempLog.replaceAll("undefined", "");
+        console.log(TempLog);
     }
 }
 function DeletePreviousEvent(){
@@ -24,14 +31,43 @@ function start(){
 }
 function stop(){
     on = false;
-}
-function stopreset(){
-    on = false;
-    timer = 0;
+    TempLog.replaceAll("undefined", "");
+    saves.push(TempLog);
+    TempLog="";
     $("#gui")[0].classList.add("alert");
     setTimeout(() => {
         $("#gui")[0].classList.remove("alert");
     }, 3000);
+}
+function stopreset(){
+    on = false;
+    timer = 0;
+    TempLog.replaceAll("undefined", "");
+    saves.push(TempLog);
+    TempLog="";
+    $("#gui")[0].classList.add("alert");
+    setTimeout(() => {
+        $("#gui")[0].classList.remove("alert");
+    }, 3000);
+}
+function EvalSave(s){
+    let r = [];
+    let save = s.toString();
+    for(var i = 0; i < save.length; i++){
+        if(save.charAt(i)+save.charAt(i+1)+save.charAt(i+2) == "[T]"){
+            let tempEvent = new Event();
+            let eventStr = "";
+            tempEvent.ts = save.substring(i+3,i+7);
+            let e = i+11;
+            while(save.charAt(e) != "["){
+                eventStr += save.charAt(e)
+                e++;
+            }
+            tempEvent.ev = eventStr;
+            r.push(tempEvent);
+        }
+    }
+    return r;
 }
 function EvalSeconds(sec){
     if(sec < 10){
