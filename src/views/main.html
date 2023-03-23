@@ -14,7 +14,6 @@
     <script src="../app/MoreOptions.js"></script>
     <script src="../app/index.js"></script>
     <script src="../app/Interface.js"></script>
-    <script src="../app/Exporter.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../app/Simulate.js"></script>
@@ -52,21 +51,12 @@
               <option>Left</option>
             </select>
           </div>
+
           <div id="header-tabs-file">
-            <div class="key">
-              <div class="modal-content">
-              <span class="close">&times;</span>
-              <h1>Key</h1>
-              <p> Red = Spot Taken </p>
-              <p> Blue = Best Move </p>
-              <p> Green = Good Move </p>
-              <p> Lightish Green = Decent Move </p>
-              <p> Light Green = Just a Move </p>
-              </div>
-              </div>
-            <button id="keyButton"> key </button>
-            <h3>Input File (DEPRECATED)</h3>
+            <h3>Import JSON from scouting app</h3>
+            <input type="file" id="file-input">
           </div>
+
           <div id="header-tabs-more">
             <button onclick="theme('dark')" class="button-theme darktheme">Dark</button>
             <button onclick="theme('light')" class="button-theme lighttheme">Light</button>
@@ -179,4 +169,5 @@
       <canvas id="myChart"></canvas>
     </div>    
   </body>
+  <script src="../app/Exporter.js"></script>
 </html>
