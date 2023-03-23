@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="../styles/style.css" />
     <link rel="stylesheet" href="../styles/grid.css" />
+    <link rel="stylsheet" href="../styles/saves.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" />
     <script src="../app/Grid.js"></script>
     <script src="../app/GridNew.js"></script>
@@ -18,33 +19,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../app/Simulate.js"></script>
     <script src="../app/key.js"></script>
+    <script src="../app/Reset.js"></script>
     <script type="module" src="../app/Graphs.js"></script>
-    <script type="importmap">
-    
-    </script>
     <title>Next Move App</title>
-    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="icon" href="../assets/icon.ico">
   </head>
   <body>
-    <div id="loading-screen">
-        <img src="../assets/preloader.jpg" alt="loading" />
-    </div>
     <div id="main">
       <div id="gui">
         <h4>Recording saved.</h4>
       </div>
+
       <header class="header">
+        <img src="https://i0.wp.com/293spike.com/wp-content/uploads/2018/02/spike2018universallogopng.png?fit=149%2C140&ssl=1" alt="icon" id="icon" />
         <div id="title">Next Move App</div>
         <div class="button-container">
           <a href="#" onclick="tab('options')" class="button" id="optionsTab">Options</a>
           <a href="#" onclick="tab('file')" class="button" id="fileTab">File</a>
-          <a href="#" onclick="tab('more')" class="button" id="moreTab">More</a>
+          <a href="#" onclick="tab('more')" class="button" id="moreTab">Themes</a>
           <a href="#" onclick="tab('simulate')" class="button" id="simulateTab">Simulate</a>
         </div>
         <div class="header-tabs">
           <div id="header-tabs-options">
             <div class="label">Other team scored coopertition bonus?</div>
             <div id="checkbox" onclick="coopertitionBonus()"></div>
+            <button id="reset" onclick="reset()">Reset</button>
             <select id="view-select">
               <option>Top</option>
               <option>Front</option>
@@ -61,7 +60,10 @@
             <button onclick="theme('dark')" class="button-theme darktheme">Dark</button>
             <button onclick="theme('light')" class="button-theme lighttheme">Light</button>
             <button onclick="theme('ocean')" class="button-theme oceantheme">Ocean</button>
+            <button onclick="theme('monochrome')" class="button-theme monochrometheme">Monochrome</button>
             <button onclick="theme('pink')" class="button-theme pinktheme">Pink</button>
+            <button onclick="theme('solarized-dark')" class="button-theme solarized-darktheme">Solarized Dark</button>
+            <button onclick="theme('solarized-light')" class="button-theme solarized-lighttheme">Solarized Light</button>
           </div>
           <div id="header-tabs-simulate">
             <button id="start" onclick="start()"><img src="../assets/start.png"></button>
@@ -122,43 +124,41 @@
             <button id="boxC8" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
             <button id="boxC9" class="gridbox hybrid" onclick="gridClickHandler(this.id)"></button>
           </div>
-        </div>
-
         <div class="grid-container">
           <h1>Next Move</h1>
           <div id="nextMove">
           <div id="nextGridA">
-            <div id="nextGridA1" class="nextGridBox"></div>
-            <div id="nextGridA2" class="nextGridBox"></div>
-            <div id="nextGridA3" class="nextGridBox"></div>
-            <div id="nextGridA4" class="nextGridBox"></div>
-            <div id="nextGridA5" class="nextGridBox"></div>
-            <div id="nextGridA6" class="nextGridBox"></div>
-            <div id="nextGridA7" class="nextGridBox"></div>
-            <div id="nextGridA8" class="nextGridBox"></div>
-            <div id="nextGridA9" class="nextGridBox"></div>
+            <div id="nextGridA1" class="nextGridBox cone"></div>
+            <div id="nextGridA2" class="nextGridBox hybrid"></div>
+            <div id="nextGridA3" class="nextGridBox cone"></div>
+            <div id="nextGridA4" class="nextGridBox cone"></div>
+            <div id="nextGridA5" class="nextGridBox hybrid"></div>
+            <div id="nextGridA6" class="nextGridBox cone"></div>
+            <div id="nextGridA7" class="nextGridBox cone"></div>
+            <div id="nextGridA8" class="nextGridBox hybrid"></div>
+            <div id="nextGridA9" class="nextGridBox cone"></div>
           </div>
           <div id="nextGridB">
-            <div id="nextGridB1" class="nextGridBox"></div>
-            <div id="nextGridB2" class="nextGridBox"></div>
-            <div id="nextGridB3" class="nextGridBox"></div>
-            <div id="nextGridB4" class="nextGridBox"></div>
-            <div id="nextGridB5" class="nextGridBox"></div>
-            <div id="nextGridB6" class="nextGridBox"></div>
-            <div id="nextGridB7" class="nextGridBox"></div>
-            <div id="nextGridB8" class="nextGridBox"></div>
-            <div id="nextGridB9" class="nextGridBox"></div>
+            <div id="nextGridB1" class="nextGridBox cone"></div>
+            <div id="nextGridB2" class="nextGridBox hybrid"></div>
+            <div id="nextGridB3" class="nextGridBox cone"></div>
+            <div id="nextGridB4" class="nextGridBox cone"></div>
+            <div id="nextGridB5" class="nextGridBox hybrid"></div>
+            <div id="nextGridB6" class="nextGridBox cone"></div>
+            <div id="nextGridB7" class="nextGridBox cone"></div>
+            <div id="nextGridB8" class="nextGridBox hybrid"></div>
+            <div id="nextGridB9" class="nextGridBox cone"></div>
           </div>
           <div id="nextGridC">
-            <div id="nextGridC1" class="nextGridBox"></div>
-            <div id="nextGridC2" class="nextGridBox"></div>
-            <div id="nextGridC3" class="nextGridBox"></div>
-            <div id="nextGridC4" class="nextGridBox"></div>
-            <div id="nextGridC5" class="nextGridBox"></div>
-            <div id="nextGridC6" class="nextGridBox"></div>
-            <div id="nextGridC7" class="nextGridBox"></div>
-            <div id="nextGridC8" class="nextGridBox"></div>
-            <div id="nextGridC9" class="nextGridBox"></div>
+            <div id="nextGridC1" class="nextGridBox hybrid"></div>
+            <div id="nextGridC2" class="nextGridBox hybrid"></div>
+            <div id="nextGridC3" class="nextGridBox hybrid"></div>
+            <div id="nextGridC4" class="nextGridBox hybrid"></div>
+            <div id="nextGridC5" class="nextGridBox hybrid"></div>
+            <div id="nextGridC6" class="nextGridBox hybrid"></div>
+            <div id="nextGridC7" class="nextGridBox hybrid"></div>
+            <div id="nextGridC8" class="nextGridBox hybrid"></div>
+            <div id="nextGridC9" class="nextGridBox hybrid"></div>
           </div>
         </div>
       </div>

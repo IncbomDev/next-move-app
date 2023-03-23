@@ -27,8 +27,7 @@ function GetBooleanValues(){
     for(var k = 1; k < 10; k++){
         if ($("#box"+conv(i)+k).css("background-color") == RED) {
             arr.push(false);
-        }
-        else {
+        } else {
             arr.push(true);
         }
     }
@@ -98,16 +97,6 @@ function RenderNewGrid(grid) {
 function gridClickHandler(a){
     var box = $("#"+a);
     var val;
-    var newGrid = new Grid();
-    newGrid.grid = GRID.grid;
-    GRID = newGrid;
-    var newgrid = GRID.grid;
-    newgrid[reverseconv(a[3]) - 1][parseInt(a[4]) - 1] = val; 
-    GRID.grid = newgrid;
-    GA.gridA = GRID;
-    GA.AnalyzeGrid();
-    RenderNewGrid(GRID.outputGrid);
-
     if(box.css("background-color") == GREEN){
         box.css("background-color", RED);
         box.addClass("gridboxRed");
@@ -125,6 +114,15 @@ function gridClickHandler(a){
         box.addClass("gridboxGreen");
         val = true;
     }
+    var newGrid = new Grid();
+    newGrid.grid = GRID.grid;
+    GRID = newGrid;
+    var newgrid = GRID.grid;
+    newgrid[reverseconv(a[3]) - 1][parseInt(a[4]) - 1] = val; 
+    GRID.grid = newgrid;
+    GA.gridA = GRID;
+    GA.AnalyzeGrid();
+    RenderNewGrid(GRID.outputGrid);
 }
 
 function printNextSpot(){
@@ -156,7 +154,7 @@ function tab(t){
     }else if(t == "more"){
         $("#header-tabs-options").css("display", "none");
         $("#header-tabs-file").css("display", "none");
-        $("#header-tabs-more").css("display", "block");
+        $("#header-tabs-more").css("display", "flex");
         $("#header-tabs-simulate").css("display", "none");
 
         $("#optionsTab").removeClass("selected");
@@ -210,5 +208,26 @@ function theme(t){
         document.documentElement.style.setProperty("--bg-color", "white");
         document.documentElement.style.setProperty("--button-hover", "#ffabf4");
         document.documentElement.style.setProperty("--button-selected", "#ff7aed");
+    }else if(t == "solarized-dark"){
+        document.documentElement.style.setProperty("--header-color", "#002b36");
+        document.documentElement.style.setProperty("--header-border", "1px solid white");
+        document.documentElement.style.setProperty("--text-color", "white");
+        document.documentElement.style.setProperty("--bg-color", "#073642");
+        document.documentElement.style.setProperty("--button-hover", "#3e756f");
+        document.documentElement.style.setProperty("--button-selected", "#586e75");
+    }else if(t == "monochrome"){
+        document.documentElement.style.setProperty("--header-color", "#000000");
+        document.documentElement.style.setProperty("--header-border", "1px solid gray");
+        document.documentElement.style.setProperty("--text-color", "white");
+        document.documentElement.style.setProperty("--bg-color", "#000000");
+        document.documentElement.style.setProperty("--button-hover", "rgb(20, 20, 20)");
+        document.documentElement.style.setProperty("--button-selected", "rgb(40, 40, 40)");
+    }else if(t == "solarized-light"){
+        document.documentElement.style.setProperty("--header-color", "#fdf6e3");
+        document.documentElement.style.setProperty("--header-border", "1px solid black");
+        document.documentElement.style.setProperty("--text-color", "black");
+        document.documentElement.style.setProperty("--bg-color", "#eee8d5");
+        document.documentElement.style.setProperty("--button-hover", "#fff4c4");
+        document.documentElement.style.setProperty("--button-selected", "#eee8d5");
     }
 }
